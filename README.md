@@ -4,6 +4,8 @@ LOGO
 
 IMAGE
 
+## Screenshots(Collapsible)
+
 ### Task allocation and Tracking
 
 For Tchiba, I am using a mixture of strategies and technologies to create, allocate and track tasks. 
@@ -66,3 +68,15 @@ The above describes the Minimum Viable Product version of Tchiba. The following 
   * Receipts (seller/buyer)
   * Credit (seller)
 * Admin page for moderation of content.
+
+## Sitemap
+
+IMAGE
+
+## Target Audience
+
+Tchiba was created to cater to a large spectrum of tea drinkers. For the tea connoisseurs, Tchiba allows users to create their product with a lot of detail, down to the details behind each part of the blend. Tchiba also allows users to send questions to sellers about particular blends if they want to know more. On the other end of the spectrum, Tchiba also allows easy navigation and exploration, as well as filtering by category and price for people just getting into tea blends who wish to simply see what is popular and well rated at the time according to their budget.  
+
+## Techstack
+
+
