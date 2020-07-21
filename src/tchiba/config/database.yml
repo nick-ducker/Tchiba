@@ -24,6 +24,9 @@ default: &default
 development:
   <<: *default
   database: tchiba_development
+  host: 127.0.0.1
+  username: nick
+  password: password
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
