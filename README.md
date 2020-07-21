@@ -18,3 +18,13 @@ From here I was able to create my implementation plan by mixing the user stories
 From this point Trello became a way of keeping track what had been done in regards to all of these lists. It also served as a way to keep track on what had been done already, what I was currently working on and what I thought needed to be done next. 
 
 I also used a devlog to keep a log of what had been done on what day as the project progressed. 
+
+### Purpose of Application
+
+Tea shops around the world not only sell single origin tea, but also sell tea blends that are generally trademarked under that particular tea shop. 
+However, within the tea loving community, there is also a culture around creating your own tea blends and sharing these blends with others. Unfortunately, this culture is somewhat invisible to the general public and overshadowed by the commercial tea brands. 
+
+The purpose of Tchiba is to provide a platform to those humans who have a passion for creating their own tea blends and want to turn a profit off doing so. Tchiba allows them to put these blends and their information online, then sell them for a nominated amount of money.
+
+The goal here is 3 fold. Tchiba aims to support and help grow grassroots tea culture, educate people outside of the community about different ways of approaching tea culture and encourage sustainable ethical approaches to sourcing tea.
+
