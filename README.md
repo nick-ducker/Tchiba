@@ -94,3 +94,7 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 *  As a Buyer, I want to receive and email for confirmation of order, confirmation of shipping.
 *  As a Buyer, I want to see my current orders and order history
 *  As an Admin, I want the ability to moderate the content on the application easily from a centralised page
+
+## API's
+
+Google places
