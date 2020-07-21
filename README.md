@@ -80,3 +80,17 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 ## Techstack
 
 
+## User Stories
+
+*  As a User, I want to be able to create, log-in to and log-out of of a personal account
+*  As a User, I want the option to to stay signed in on a particular browser if I choose to do so
+*  As a User, I want to be able to search through content and filter my results, and order my results
+*  As a User, I want to be able to add items to my cart, remove items from my cart and update the quantity of items in the cart
+*  As a User, I want to be able to create my own products and display them on the marketplace
+*  As a User, I want to be able to add price, detail, categories and images to my products
+*  As a User, I want to be able to message a seller and ask questions about a particular product
+*  As a Seller, I want an automatically generated report of orders and their status
+*  As a Seller, I want to receive notifications that an order has been placed on a product I sell
+*  As a Buyer, I want to receive and email for confirmation of order, confirmation of shipping.
+*  As a Buyer, I want to see my current orders and order history
+*  As an Admin, I want the ability to moderate the content on the application easily from a centralised page
