@@ -9,3 +9,11 @@
   * Create rails application within file structure
   * Create postgresql database
   * Create Devlog
+  * Describe task allocation and tracking
+  * ID problem I'm trying to solve
+  * Define why the problem needs solving
+  * User stories
+  * Partial description of application
+  * Start ERD
+
+### 22/7/20
