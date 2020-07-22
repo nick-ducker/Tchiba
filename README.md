@@ -71,7 +71,7 @@ The above describes the Minimum Viable Product version of Tchiba. The following 
 
 ## Sitemap
 
-IMAGE
+![Tchiba Sitemap](docs/imgs/tchiba_site_map.png)
 
 ## Target Audience
 
@@ -98,3 +98,4 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 ## API's
 
 Google places
+
