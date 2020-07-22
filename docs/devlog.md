@@ -17,3 +17,5 @@
   * Start ERD
 
 ### 22/7/20
+  * Finished first draft of ERD
+  * Finished first draft of Site Map
