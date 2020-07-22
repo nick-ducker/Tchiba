@@ -99,3 +99,6 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 
 Google places
 
+## Planning phase ERD
+
+![Planned ERD](docs/imgs/tchiba_erd.png)
