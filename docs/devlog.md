@@ -23,3 +23,6 @@
 ### 27/7/20
   * Finished Wireframes (finally)
   * Added Database Relations implementation plan to readme
+  * Updated ERD
+  * Updated Sitemap
+  * Updated Implementation plan
