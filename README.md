@@ -118,6 +118,7 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 *  Heroku
 *  AWS S3
 *  Stripe
+*  Mailgun
 
 ## Planning phase ERD
 
