@@ -19,3 +19,7 @@
 ### 22/7/20
   * Finished first draft of ERD
   * Finished first draft of Site Map
+
+### 27/7/20
+  * Finished Wireframes (finally)
+  * Added Database Relations implementation plan to readme
