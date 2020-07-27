@@ -97,8 +97,105 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 
 ## API's
 
-Google places
+*  Devise
+*  
 
 ## Planning phase ERD
 
 ![Planned ERD](docs/imgs/tchiba_erd.png)
+
+## Database relations to be implemented
+
+Tchiba is strongly oriented around the interaction of Users via Blends. As such, most of the relations for Tchiba either connect or add attributes/detail to these two tables.
+
+Before implementation, these are the relationships that have been planned. This list was made using the planned ERD above.
+
+#### Primary Tables
+
+*  User
+    Has Many or None
+      * Conversations
+      * Blends
+      * Reviews
+      * Orders
+
+    Has one or None
+      * Address 
+
+As previously mentioned, the user sits centrally in the applications framework. One User can own many blends which they create and edit. They have many conversations, which also relate to a blend in question. A user may only have one or no address, but will be required to have an address to create a blend. Lastly, a user can have many orders, either as a buyer or a seller.  
+
+*  Blend
+    Belongs to
+      * User
+      * Orders, through Orders Blends
+
+    Has Many
+      * Attributes, through Blends Attributes
+
+    Has Many or None
+      * Images
+      * Reviews
+      * Conversations
+      
+Blends always belong to a single user. A blend may also belong to multiple orders, through the orders blends join table. When a Blend is created it must have at least one attribute in order to more easily categorize all the products, which is achieved through a blends attributes join table. It also can have many or no images, reviews and conversations.  
+
+#### Secondary Tables
+
+*  Conversation
+    Has many
+      * Messages
+
+    Belongs to
+      * Blend
+      * Users
+
+A Conversation always belongs to a particular blend, which is treated as the subject. It also belongs to the two users in question, the buyer and the seller. It has many messages, which exist separately.
+
+*  Order
+    Belongs to
+      * Users
+
+    Has many
+      * Blends, through Orders Blends
+  
+    Has many or None
+      * Transactions
+
+An order is created once someone "checks out" their cart. It belongs to both the seller and the buyer when it is created and also many blends through a join table. It can have many or no transactions, as when it is created, payment will not have been processed and may fail. This also allows for the ability to refund and list it as such on the same order.
+
+* Address
+    Belongs to:
+      * User
+
+An address is simply created when a user chooses to input it into the system. It belongs to a user and will be mandatory to input before a blend can be created. 
+
+*  Review
+    Belongs to:
+      * User
+      * Blend
+
+A review is a small description and rating of a blend that is submitted by a user. As such it belongs to one user and also to one blend.
+
+*  Attribute
+    Has many or none
+      * Blends, through Blends Attributes
+
+An attribute is part of categorising blends and making them easier to search. Using a join table, an attribute "belongs to" many blends.
+
+* Transaction
+    Belongs to
+      * Order
+
+A transaction belongs to and order to quantify the amount of money moving in regards to that order. It may only belong to one order.
+
+* Message 
+    Belongs to
+      * Conversation
+
+Belongs to one conversation only. A boolean is reponsible for differentiating the users
+
+* Image
+    Belongs to
+      * Blend
+
+Belongs to only one blend.
