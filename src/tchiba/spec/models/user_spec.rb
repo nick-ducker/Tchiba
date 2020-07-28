@@ -1,38 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  
-  subject {
-    described_class.new(id: 1,
-                        email: "test@test.com",
-                        password: "password")
-  }
+
+  before(:all) do
+    @user = build(:user)
+  end
 
   it "is valid with valid attributes" do 
-    expect(subject).to be_valid
+    expect(@user).to be_valid
   end
 
   it "is valid without a name" do 
-    subject.name = nil
-    expect(subject).to be_valid
+    @user.name = nil
+    expect(@user).to be_valid
   end
 
   it "is valid without a bio" do
-    subject.bio = nil
-    expect(subject).to be_valid    
+    @user.bio = nil
+    expect(@user).to be_valid    
   end
   it "is not valid without an email" do
-    subject.email = nil
-    expect(subject).to_not be_valid
+    @user.email = nil
+    expect(@user).to_not be_valid
   end
   it "is not valid without a password" do
-    subject.password = nil
-    expect(subject).to_not be_valid
+    @user.password = nil
+    expect(@user).to_not be_valid
   end
 
   it "is not valid without credit" do
-    subject.credit = nil
-    expect(subject).to_not be_valid
+    @user.credit = nil
+    expect(@user).to_not be_valid
   end
 
   it { should have_one(:address) }
