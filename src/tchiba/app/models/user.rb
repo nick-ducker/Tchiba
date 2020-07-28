@@ -5,5 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
+  has_one :address
+  has_many :conversations
+  has_many :blends
+  has_many :reviews
+  has_many :orders
+
   validates_presence_of :credit
+
+  
 end

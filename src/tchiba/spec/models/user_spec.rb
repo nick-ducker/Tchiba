@@ -35,4 +35,14 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
+  it { should have_one(:address) }
+
+  it { should have_many(:conversations) } 
+
+  it { should have_many(:blends) }
+
+  it { should have_many(:reviews) }
+
+  it { should have_many(:orders) }
+
 end
