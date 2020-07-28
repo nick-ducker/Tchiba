@@ -61,13 +61,16 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Default URL for action mailer
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
 
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-      api_key: Rails.application.credentials.dig(:mailgun, :api_key),
-      domain: Rails.application.credentials.dig(:mailgun, :secret_access_key)
-  }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
+  # config.action_mailer.delivery_method = :mailgun
+  # config.action_mailer.mailgun_settings = {
+  #     api_key: Rails.application.credentials.dig(:mailgun, :api_key),
+  #     domain: Rails.application.credentials.dig(:mailgun, :secret_access_key)
+  # }
 
   config.action_mailer.perform_deliveries = true
 end
