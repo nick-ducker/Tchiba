@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :order do
+    buyer_id { 1 }
+    seller_id { 2 }
+    gross { 9.99 }
+    total { 9.99 }
+  end
+
   factory :review do
     user_id { 1 }
     blend_id { 1 }

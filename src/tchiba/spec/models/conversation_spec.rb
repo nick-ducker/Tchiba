@@ -5,7 +5,7 @@ RSpec.describe Conversation, type: :model do
   before(:all) do
     @user1 = create(:user)
     @user2 = create(:user)
-    #@blend = build(:blend)
+    @blend = create(:blend)
 
     @conversation = build(:conversation)
   end

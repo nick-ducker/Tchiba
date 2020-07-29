@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_071419) do
+ActiveRecord::Schema.define(version: 2020_07_29_072023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,20 @@ ActiveRecord::Schema.define(version: 2020_07_29_071419) do
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "buyer_id"
+    t.bigint "seller_id"
+    t.boolean "shipped", default: false
+    t.decimal "gross", precision: 20, scale: 2
+    t.decimal "discount", precision: 10, scale: 2, default: "0.0"
+    t.decimal "total", precision: 20, scale: 2
+    t.boolean "paid", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
+    t.index ["seller_id"], name: "index_orders_on_seller_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string "name"
     t.text "descrip"
@@ -135,6 +149,8 @@ ActiveRecord::Schema.define(version: 2020_07_29_071419) do
   add_foreign_key "conversations", "users", column: "from_user_id"
   add_foreign_key "conversations", "users", column: "to_user_id"
   add_foreign_key "messages", "conversations"
+  add_foreign_key "orders", "users", column: "buyer_id"
+  add_foreign_key "orders", "users", column: "seller_id"
   add_foreign_key "reviews", "blends"
   add_foreign_key "reviews", "users"
 end
