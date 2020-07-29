@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :message do
+    is_from_user { false }
+    content { "MyText" }
+    conversation { nil }
+  end
 
   sequence :email do |n|
     "person#{n}@example.com"

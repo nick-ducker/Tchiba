@@ -5,4 +5,6 @@ class Conversation < ApplicationRecord
 
   belongs_to :blend
 
+  has_many :messages
+
 end

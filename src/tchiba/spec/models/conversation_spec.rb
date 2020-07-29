@@ -19,4 +19,6 @@ RSpec.describe Conversation, type: :model do
 
   it { should belong_to(:blend) }
 
+  it { should have_many(:messages)}
+
 end
