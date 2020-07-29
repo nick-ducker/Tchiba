@@ -3,11 +3,11 @@ class Blend < ApplicationRecord
 
   has_many :conversations
   
-  has_many :orders_blends
-  has_many :orders, through: :orders_blends
+  
+  has_and_belongs_to_many :orders
 
   has_many :blends_properties
-  has_many :properties, through: :blends_properties
+  has_and_belongs_to_many :properties
 
   has_many :reviews
   

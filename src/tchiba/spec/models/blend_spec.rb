@@ -39,8 +39,8 @@ RSpec.describe Blend, type: :model do
   it { should belong_to(:user) }
 
   it { should have_many(:conversations) }
-  it { should have_many(:properties).through(:blends_properties) }
-  it { should have_many(:orders).through(:orders_blends) }
+  it { should have_and_belong_to_many(:properties) }
+  it { should have_and_belong_to_many(:orders) }
   it { should have_many(:reviews) }
 
 end
