@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :review do
+    user_id { 1 }
+    blend_id { 1 }
+    rating { "2.44" }
+    descrip { "MyText" }
+  end
+
   factory :property do
     name { "MyString" }
     descrip { "MyText" }
