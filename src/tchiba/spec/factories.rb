@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :message do
-    is_from_user { false }
     content { "MyText" }
-    conversation { nil }
+    conversation { 1 }
   end
 
   sequence :email do |n|
