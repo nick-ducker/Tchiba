@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_053729) do
+ActiveRecord::Schema.define(version: 2020_07_29_055150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2020_07_29_053729) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "blends", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "totalrating", precision: 3, scale: 2, default: "0.0"
+    t.string "name"
+    t.decimal "price", precision: 10, scale: 2
+    t.integer "quantity"
+    t.text "descrip"
+    t.integer "weight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_blends_on_user_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -90,6 +103,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_053729) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "blends", "users"
   add_foreign_key "conversations", "users", column: "from_user_id"
   add_foreign_key "conversations", "users", column: "to_user_id"
   add_foreign_key "messages", "conversations"
