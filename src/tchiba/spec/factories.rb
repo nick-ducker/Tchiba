@@ -1,4 +1,13 @@
 FactoryBot.define do
+  factory :blend do
+    user_id { 1 }
+    name { "MyString" }
+    price { "9.99" }
+    quantity { 1 }
+    descrip { "MyText" }
+    weight { 100 }
+  end
+
   factory :message do
     content { "MyText" }
     conversation { 1 }
