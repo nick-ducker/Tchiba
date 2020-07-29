@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :property do
+    name { "MyString" }
+    descrip { "MyText" }
+  end
+
   factory :blend do
     user_id { 1 }
     name { "MyString" }
