@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Address, type: :model do
 
   before(:all) do
-    build(:user)
+    create(:user)
     @address = build(:address)
   end
 
