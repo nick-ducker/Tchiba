@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  #PAGE ROUTING
   get '/', to: 'pages#home'
   get '/home', to: 'pages#home'
 
@@ -11,5 +12,11 @@ Rails.application.routes.draw do
   get '/admindash', to: 'pages#admindashboard'
 
   get '/browse', to: 'pages#browse'
+
+  #USER ROUTING
+  get 'users/account', to: 'users#show'
+  get 'users/reviews', to: 'users#reviewhistory'
+  get 'users/orders', to: 'users#ordertransactionhistory'
+  get 'users/profile/:id', to: 'users#profile'
 
 end
