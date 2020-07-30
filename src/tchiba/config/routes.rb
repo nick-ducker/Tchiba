@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'blends/create'
+  get 'blends/show'
+  get 'blends/edit'
+  get 'blends/delete'
+  get 'blends/update'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -18,5 +23,8 @@ Rails.application.routes.draw do
   get 'users/reviews', to: 'users#reviewhistory'
   get 'users/orders', to: 'users#ordertransactionhistory'
   get 'users/profile/:id', to: 'users#profile'
+
+  #BLEND ROUTING
+  resources :blends
 
 end
