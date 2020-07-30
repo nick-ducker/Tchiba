@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+  get 'reviews/create'
+  get 'reviews/edit'
+  get 'reviews/update'
+  get 'reviews/show'
+  get 'reviews/destroy'
   get 'orders/new'
   get 'orders/create'
   get 'orders/show'
@@ -41,4 +47,6 @@ Rails.application.routes.draw do
   #ORDER ROUTING
   resources :orders
   
+  #REVIEW ROUTING
+  resources :reviews
 end
