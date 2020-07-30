@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'orders/new'
+  get 'orders/create'
+  get 'orders/show'
+  get 'orders/update'
+  get 'orders/destroy'
   get 'conversations/index'
   get 'conversations/show'
   get 'conversations/new'
@@ -33,5 +38,7 @@ Rails.application.routes.draw do
   resources :conversations
   post '/conversations/:id', to: 'conversations#add'
   
-
+  #ORDER ROUTING
+  resources :orders
+  
 end
