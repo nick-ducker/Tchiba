@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe Message, type: :model do
   
   before(:all) do 
+    create(:user)
+    create(:user)
+    create(:blend)
     create(:conversation)
     @message = build(:message)
   end

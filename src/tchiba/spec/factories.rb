@@ -34,7 +34,7 @@ FactoryBot.define do
 
   factory :message do
     content { "MyText" }
-    conversation { 1 }
+    conversation_id { 1 }
   end
 
   sequence :email do |n|
