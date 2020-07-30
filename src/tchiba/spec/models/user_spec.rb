@@ -4,6 +4,8 @@ RSpec.describe User, type: :model do
 
   before(:all) do
     @user = build(:user)
+    build(:conversation)
+    build(:order)
   end
 
   it "is valid with valid attributes" do 
@@ -35,13 +37,14 @@ RSpec.describe User, type: :model do
 
   it { should have_one(:address) }
 
-  it { should have_many(:conversations) } 
+  it { should have_many(:to_conversations).with_foreign_key('to_user_id') } 
+  it { should have_many(:from_conversations).with_foreign_key('from_user_id') } 
 
   it { should have_many(:blends) }
-
   it { should have_many(:reviews) }
 
-  it { should have_many(:orders) }
+  it { should have_many(:buyer_orders).with_foreign_key('buyer_id') }
+  it { should have_many(:seller_orders).with_foreign_key('seller_id') }
 
   it "has one attached image" do
     should respond_to(:profilepic)
