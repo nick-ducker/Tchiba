@@ -5,11 +5,11 @@ class Blend < ApplicationRecord
   
   
   has_and_belongs_to_many :orders
-
-  has_many :blends_properties
   has_and_belongs_to_many :properties
 
   has_many :reviews
+
+  has_many_attached :images
   
   validates_presence_of :name, :price, :quantity, :descrip, :weight
   validates_numericality_of :price, :weight

@@ -43,4 +43,8 @@ RSpec.describe User, type: :model do
 
   it { should have_many(:orders) }
 
+  it "has one attached image" do
+    should respond_to(:profilepic)
+  end
+
 end

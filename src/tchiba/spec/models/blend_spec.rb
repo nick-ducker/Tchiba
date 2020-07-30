@@ -43,4 +43,8 @@ RSpec.describe Blend, type: :model do
   it { should have_and_belong_to_many(:orders) }
   it { should have_many(:reviews) }
 
+  it "has many attached images" do
+    should respond_to(:images)
+  end
+
 end

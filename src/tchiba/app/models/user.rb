@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   has_one :address
+  has_one_attached :profilepic
   has_many :conversations
   has_many :blends
   has_many :reviews
