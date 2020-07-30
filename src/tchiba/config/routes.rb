@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'blends/create'
-  get 'blends/show'
-  get 'blends/edit'
-  get 'blends/delete'
-  get 'blends/update'
+  get 'conversations/index'
+  get 'conversations/show'
+  get 'conversations/new'
+  get 'conversations/create'
+  get 'conversations/add'
+  get 'conversations/destroy'
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -26,5 +28,10 @@ Rails.application.routes.draw do
 
   #BLEND ROUTING
   resources :blends
+
+  #CONVERSATION ROUTING
+  resources :conversations
+  post '/conversations/:id', to: 'conversations#add'
+  
 
 end
