@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 
     @buyertransactions = buyerorders.transactions
     @sellertransactions = sellerorders.transactions
+
   end
 
   private

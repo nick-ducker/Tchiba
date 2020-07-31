@@ -1,9 +1,34 @@
 <h1>Users#ordertransactionhistory</h1>
 
 <h2>Your buying orders </h2>
-
+<% @buyerorders.each do |order| %>
+  <%= link_to 'Order Contents', order_path(order) %>
+  <p>Shipping to: <%= order.buyer.address.number %>, <%= order.buyer.address.street %>, <%= order.buyer.address.suburb %>, <%= order.buyer.address.state %> <%= order.buyer.address.postcode %> </p>
+  <p>Shipping status: <%= order.shipped ? "Shipped" : "Not Shipped" %> </p>
+  <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
+  <p>Date of Order: <%= order.created_at %>
+<% end %>
 <h2>Your selling orders </h2>
-
-<h2>Your buying transactions </h2>
-
-<h2>Your selling transactions </h2>
+<% @sellerorders.each do |order| %>
+  <%= link_to 'Order Contents', order_path(order) %>
+  <p>Shipping to: <%= order.buyer.address.number %>, <%= order.buyer.address.street %>, <%= order.buyer.address.suburb %>, <%= order.buyer.address.state %> <%= order.buyer.address.postcode %> </p>
+  <p>Shipping status: <%= order.shipped ? "Shipped" : "Not Shipped" %> </p>
+  <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
+  <p>Date of Order: <%= order.created_at %>
+<% end %>
+<h2>Your buyer transactions </h2>
+<% @buyertransactions.each do |transact| %>
+  <% if transact.paid %>
+  <p><%= is_refund ? "+" : "-" %><%= transact.amount %></p>
+  <%= link_to 'Order', order_path(transact.order) %></p>
+  <p>Paid on:<%= trasact.updated_at %></p>
+  <% end %>
+<% end %>
+<h2>Your sellertransactions </h2>
+<% @sellertransactions.each do |transact| %>
+  <% if transact.paid %>
+  <p><%= is_refund ? "-" : "+" %><%= transact.amount %></p>
+  <%= link_to 'Order', order_path(transact.order) %></p>
+  <p>Paid on:<%= trasact.updated_at %></p>
+  <% end %>
+<% end %>
