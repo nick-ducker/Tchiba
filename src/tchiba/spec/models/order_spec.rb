@@ -22,8 +22,6 @@ RSpec.describe Order, type: :model do
     expect(@order).to_not be_valid
   end
 
-  it { should have_and_belong_to_many(:blends) }
-
   it { should belong_to(:buyer) }
   it { should belong_to(:seller) }
 

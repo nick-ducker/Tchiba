@@ -5,8 +5,6 @@ class Blend < ApplicationRecord
 
   has_many :cart_items
   
-  
-  has_and_belongs_to_many :orders
   has_and_belongs_to_many :properties
 
   has_many :reviews
