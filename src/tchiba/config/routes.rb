@@ -1,22 +1,4 @@
 Rails.application.routes.draw do
-  get 'reviews/new'
-  get 'reviews/create'
-  get 'reviews/edit'
-  get 'reviews/update'
-  get 'reviews/show'
-  get 'reviews/destroy'
-  get 'orders/new'
-  get 'orders/create'
-  get 'orders/show'
-  get 'orders/update'
-  get 'orders/destroy'
-  get 'conversations/index'
-  get 'conversations/show'
-  get 'conversations/new'
-  get 'conversations/create'
-  get 'conversations/add'
-  get 'conversations/destroy'
-
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -49,4 +31,11 @@ Rails.application.routes.draw do
   
   #REVIEW ROUTING
   resources :reviews
+
+  #CART ROUTING
+  get 'cart/show', to: 'carts#show'
+  get 'cart/update', to: 'carts#update_quantity'
+  get 'cart/remove', to: 'carts#remove_item'
+  get 'cart/checkout', to: 'carts#checkout'
+  
 end
