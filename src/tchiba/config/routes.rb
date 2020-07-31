@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   get '/browse', to: 'pages#browse'
 
   #USER ROUTING
-  get 'users/account', to: 'users#show'
-  get 'users/reviews', to: 'users#reviewhistory'
-  get 'users/orders', to: 'users#ordertransactionhistory'
-  get 'users/profile/:id', to: 'users#profile'
+  get 'users/account', to: 'users#show', as: 'account'
+  get 'users/reviews', to: 'users#reviewhistory', as: 'review_history'
+  get 'users/orders', to: 'users#ordertransactionhistory', as: 'order_history'
+  get 'users/profile/:id', to: 'users#profile', as: 'profile'
 
   #BLEND ROUTING
   resources :blends
