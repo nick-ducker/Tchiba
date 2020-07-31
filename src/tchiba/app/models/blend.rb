@@ -2,6 +2,8 @@ class Blend < ApplicationRecord
   belongs_to :user
 
   has_many :conversations
+
+  has_many :cart_items
   
   
   has_and_belongs_to_many :orders
