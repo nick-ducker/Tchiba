@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def reviewhistory
     #private
+    @reviews = current_user.reviews
   end
 
   def ordertransactionhistory

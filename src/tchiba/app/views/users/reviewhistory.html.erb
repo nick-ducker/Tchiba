@@ -1,2 +1,12 @@
 <h1>Users#reviewhistory</h1>
-<p>Find me in app/views/users/reviewhistory.html.erb</p>
+
+<% if @reviews.empty? %>
+  <p> You haven't created any reviews yet</p>
+<% else %>
+  <% @reviews.each do |review| %>
+    <%= review.blend.name %>
+    <%= review.rating %>
+    <%= review.descrip %>
+    <%= review.created_at %>
+  <% end %>
+<% end %>
