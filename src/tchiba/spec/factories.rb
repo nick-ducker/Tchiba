@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :cart_item do
+    cart_id { 1 }
+    blend_id { 1 }
+  end
+
   factory :cart do
     user_id { 1 }
   end
