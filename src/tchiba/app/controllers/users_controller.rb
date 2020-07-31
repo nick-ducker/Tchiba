@@ -22,6 +22,19 @@ class UsersController < ApplicationController
 
   def ordertransactionhistory
     #private
+    orders = current_user.orders
+
+    @buyerorders = Array.new
+    @sellerorders = Array.new
+    orders.each do |order|
+      if order.seller == current_user.id
+        @sellerorders << order
+      else
+        @buyerorders << order
+      end
+
+    @buyertransactions = buyerorders.transactions
+    @sellertransactions = sellerorders.transactions
   end
 
   private
