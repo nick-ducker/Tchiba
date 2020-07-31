@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_many :buyer_orders, foreign_key: "buyer_id", class_name: "Order"
   has_many :seller_orders, foreign_key: "seller_id", class_name: "Order"
 
-  validates_presence_of :credit
-
+  validates_presence_of :credit, :name
   
 end

@@ -51,9 +51,14 @@ FactoryBot.define do
     "person#{n}@example.com"
   end
 
+  sequence :email do |n|
+    "person#{n}"
+  end
+
   factory :user do
     email { generate :email }
     password  { "password" }
+    name {generate :name}
   end
 
   factory :address do
