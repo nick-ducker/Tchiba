@@ -1,6 +1,7 @@
 <h1>Home Page</h1>
 
 <% if current_user %>
+  <%= link_to "Account", account_path %>
   <%= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
 <% else %>
   <%= link_to "Login", user_session_path %>

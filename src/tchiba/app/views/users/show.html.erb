@@ -1,2 +1,9 @@
 <h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
+<p> Username: <%= @user.name %> </p>
+<p> E-Mail: <%= @user.email %> </p>
+<p> Bio: <%= @user.bio %> </p>
+
+<%= link_to 'Profile page', profile_path(@user) %>
+<%= link_to 'Your Reviews', review_history_path %>
+<%= link_to 'Your Orders & Transactions', order_history_path %>
