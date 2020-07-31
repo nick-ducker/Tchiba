@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :cart do
+    user_id { 1 }
+  end
+
   factory :transaction do
     order_id { 1 }
     amount { 9.99 }
