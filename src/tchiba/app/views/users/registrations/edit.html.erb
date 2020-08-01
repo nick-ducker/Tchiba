@@ -41,6 +41,11 @@
     <%= f.text_area :bio %>
   </div>
 
+  <div class="field">
+    <%= f.label :profilepic %><br />
+    <%= f.file_field :profilepic %>
+  </div>
+
     <%= f.fields_for :address, resource.address do |address_f| %>
       <div class="field">
         <%= address_f.label :number %><br />

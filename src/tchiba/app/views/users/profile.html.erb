@@ -3,3 +3,4 @@
 <p> Username: <%= @user.name %> </p>
 <p> E-Mail: <%= @user.email %> </p>
 <p> Bio: <%= @user.bio %> </p>
+<%= image_tag @user.profilepic if @user.profilepic.attached? %>

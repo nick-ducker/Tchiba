@@ -3,6 +3,7 @@
 <p> Username: <%= @user.name %> </p>
 <p> E-Mail: <%= @user.email %> </p>
 <p> Bio: <%= @user.bio %> </p>
+<% image_tag @user.profilepic if @user.profilepic.attached? %>
 
 <%= link_to 'Profile page', profile_path(@user) %>
 <%= link_to 'Edit Account Details', edit_user_registration_path %>
