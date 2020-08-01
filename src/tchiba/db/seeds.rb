@@ -5,3 +5,62 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+n = 1
+user_id = n
+
+email = "email#{n}"
+encrypted_password = "password#{n}"
+name = "user#{n}"
+bio = "I am a bio for #{name}"
+
+number = n
+street = "street #{n}"
+suburb = "suburb #{n}"
+state = "state #{n}"
+postcode = n + 5000
+
+4.times do 
+  user = User.create(email: email, encrypted_password: encrypted_password, name: name, bio: bio)
+  user.create_address(number: number, user_id: user_id, street: street, suburb: suburb, state: state, postcode: postcode)
+  user.create_cart
+  n += 1
+end
+
+n = 1
+x = 1
+
+name = "blend#{n}"
+price = n
+quantity = n + 10
+descrip = "This is a description"
+weight = 500
+
+8.times do
+  User.find(x).blend.create(name: name, price: price, quantity: quantity, descrip: descrip, weight: weight)
+  if n % 2 == 0
+    x += 1
+    n += 1
+  else
+    n += 1
+  end
+end
+
+carts = Cart.all
+
+carts.each do |cart|
+  3.times do
+    cart.cart_item.create(blend_id: rand(1..8))
+  end
+
+  cart_items_by_user = cart.cart_item.all.group_by{|obj| obj.blend.user}
+
+  cart_items_by_user.each_key do |k|
+    cart_items_by_user[k].each do |cartitem|
+      #do I then create an order for each cart item based on its quantity?
+    end
+  end
+end
+
+
+

@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   has_one :address
+  has_one :cart
   has_one_attached :profilepic
   has_many :to_conversations, foreign_key: "to_user_id", class_name: "Conversation"
   has_many :from_conversations, foreign_key: "from_user_id", class_name: "Conversation"
