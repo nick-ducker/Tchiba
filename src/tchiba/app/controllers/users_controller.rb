@@ -32,6 +32,7 @@ class UsersController < ApplicationController
       else
         @buyerorders << order
       end
+    end
 
     @buyertransactions = buyerorders.transactions
     @sellertransactions = sellerorders.transactions
