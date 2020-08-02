@@ -50,7 +50,7 @@ carts = Cart.all
 
 carts.each do |cart|
   3.times do
-    cart.cart_item.create(blend_id: rand(1..8))
+    cart.cart_item.create(blend_id: rand(1..8), quantity: rand(1..5))
   end
 
   cart_items_by_user = cart.cart_item.all.group_by{|obj| obj.blend.user}
@@ -58,6 +58,10 @@ carts.each do |cart|
   cart_items_by_user.each_key do |k|
     cart_items_by_user[k].each do |cartitem|
       #do I then create an order for each cart item based on its quantity?
+      gross = cart_item.blend.price * cart_item.quantity
+      shipping = cart_item.blend.shipping_cost
+      discount = cart_item.blend.discount * cart_item.quantity
+      cart_item.create_order(buyer_id: cart_item.cart.user_id, seller_id: cart_item.blend.user_id, gross: gross, total: )
     end
   end
 end
