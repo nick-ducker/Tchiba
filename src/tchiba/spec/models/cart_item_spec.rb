@@ -21,4 +21,6 @@ RSpec.describe CartItem, type: :model do
   it { should belong_to(:cart) }
   it { should belong_to(:blend) }
 
+  it { should have_one(:order) }
+
 end

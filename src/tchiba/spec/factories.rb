@@ -14,7 +14,7 @@ FactoryBot.define do
   end
 
   factory :order do
-    cart_id { 1 }
+    cart_item_id { 1 }
     buyer_id { 1 }
     seller_id { 2 }
     gross { 9.99 }

@@ -6,6 +6,8 @@ RSpec.describe Order, type: :model do
     user1 = create(:user)
     user2 = create(:user)
     create(:cart)
+    create(:blend)
+    create(:cart_item)
     @order = build(:order)
   end
 
@@ -23,7 +25,7 @@ RSpec.describe Order, type: :model do
     expect(@order).to_not be_valid
   end
 
-  it { should belong_to(:cart) }
+  it { should belong_to(:cart_item) }
 
   it { should belong_to(:buyer) }
   it { should belong_to(:seller) }
