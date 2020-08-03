@@ -1,0 +1,21 @@
+<h1>Create a Blend</h1>
+
+<%= form_with model: @blend do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :price %>
+  <%= f.number_field :price %><br>
+  <%= f.label :shipping_cost %>
+  <%= f.number_field :shipping_cost %><br>
+  <%= f.label :discount_amount %>
+  <%= f.number_field :discount_amount %><br>
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity %><br>
+  <%= f.label :descrip %>
+  <%= f.text_area :descrip %><br>
+  <%= f.label :weight %>
+  <%= f.number_field :weight %><br>
+  <%= f.label :image, 'Images' %>
+  <%= f.file_field :image, multiple: true %><br>
+  <%= f.submit %>
+<% end %>

@@ -3,6 +3,12 @@ class BlendsController < ApplicationController
   end
 
   def new
+    if current_user
+      @blend = Blend.new
+    else
+      flash[:alert] = "You must create an account to do this."
+      redirect_to new_user_registration_path
+    end
   end
 
   def show
