@@ -128,7 +128,7 @@ Rails.application.configure do
     :port               => 587,
     :domain             => 'gmail.com', 
     :authentication     => :plain,
-    :user_name          => 'gcam021932',
-    :password           => ENV['GMAIL_PASSWORD']
+    :user_name          => 'gcam021932@coderacademy.edu.au',
+    :password           => '12345678'
   }
 end
