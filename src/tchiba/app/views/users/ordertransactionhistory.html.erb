@@ -8,6 +8,7 @@
   <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
   <p>Date of Order: <%= order.created_at %>
 <% end %>
+
 <h2>Your selling orders </h2>
 <% @sellerorders.each do |order| %>
   <%= link_to 'Order Contents', order_path(order) %>
@@ -16,19 +17,21 @@
   <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
   <p>Date of Order: <%= order.created_at %>
 <% end %>
+
 <h2>Your buyer transactions </h2>
 <% @buyertransactions.each do |transact| %>
   <% if transact.paid %>
-  <p><%= is_refund ? "+" : "-" %><%= transact.amount %></p>
+  <p><%= transact.is_refund ? "+" : "-" %><%= transact.amount %></p>
   <%= link_to 'Order', order_path(transact.order) %></p>
-  <p>Paid on:<%= trasact.updated_at %></p>
+  <p>Paid on:<%= transact.updated_at %></p>
   <% end %>
 <% end %>
+
 <h2>Your sellertransactions </h2>
 <% @sellertransactions.each do |transact| %>
   <% if transact.paid %>
-  <p><%= is_refund ? "-" : "+" %><%= transact.amount %></p>
+  <p><%= transact.is_refund ? "-" : "+" %><%= transact.amount %></p>
   <%= link_to 'Order', order_path(transact.order) %></p>
-  <p>Paid on:<%= trasact.updated_at %></p>
+  <p>Paid on:<%= transact.updated_at %></p>
   <% end %>
 <% end %>

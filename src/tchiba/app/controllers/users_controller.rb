@@ -13,6 +13,10 @@ class UsersController < ApplicationController
       flash[:alert] = "That user doesn't exist"
       redirect_to root_path
     end
+
+    @blends = @user.blends
+    pp @blends
+    @reviews = @user.reviews
   end
 
   def reviewhistory
@@ -21,21 +25,23 @@ class UsersController < ApplicationController
   end
 
   def ordertransactionhistory
-    #private
-    orders = current_user.orders
 
-    @buyerorders = Array.new
-    @sellerorders = Array.new
-    orders.each do |order|
-      if order.seller == current_user.id
-        @sellerorders << order
-      else
-        @buyerorders << order
+    @buyerorders = current_user.buyer_orders
+    @sellerorders = current_user.seller_orders
+
+    @buyertransactions = Array.new
+    @buyerorders.each do |order|
+      order.transactions.each do |transact|
+        @buyertransactions << transact
       end
     end
-
-    @buyertransactions = buyerorders.transactions
-    @sellertransactions = sellerorders.transactions
+   
+    @sellertransactions = Array.new
+    @sellerorders.each do |order|
+      order.transactions.each do |transact|
+        @sellertransactions << transact
+      end
+    end
 
   end
 
