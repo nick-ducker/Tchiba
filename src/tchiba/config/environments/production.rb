@@ -126,6 +126,6 @@ Rails.application.configure do
     :port                 => 587,
     :enable_starttls_auto => true,
     :authentication       => :plain,
-    :domain               => "tchiba.herokuapp.com"
+    :domain               => "heroku.com"
   }
 end
