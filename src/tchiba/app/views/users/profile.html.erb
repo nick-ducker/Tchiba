@@ -9,7 +9,7 @@
   <p>This user has not created any blends</p>
 <% else %>
   <% @blends.each do |blend| %>
-    <p><%= blend.name %></p>
+    <p><%= link_to  blend.name, blend_path(blend) %></p>
     <p><%= blend.price %></p>
     <p><%= blend.weight %></p>
     <p><%= blend.totalrating %></p>
