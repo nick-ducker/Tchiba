@@ -1,2 +1,13 @@
 <h1><%= @blend.name %></h1>
+<h2>Blend by <%= link_to  @blend.user.name, profile_path(@blend.user) %></h2>
+<p> <%= @blend.price %> </p>
+<p> <%= @blend.weight %>g </p>
+<p> <%= @blend.shipping_cost %> </p>
+<p> <%= @blend.discount_amount %> </p>
+<p> <%= @blend.descrip %> </p>
+<p> <%= @blend.price %> </p>
+<% @blend.properties.each do |property| %>
+  <%= property.name %>
+  <%= property.descrip %><br>
+<% end %>
 
