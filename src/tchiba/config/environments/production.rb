@@ -119,13 +119,16 @@ Rails.application.configure do
   # }
 
   config.action_mailer.default_url_options = { :host => 'tchiba.herokuapp.com' }
-  ActionMailer::Base.smtp_settings = {
-    :user_name            => ENV['SENDGRID_USERNAME'],
-    :password             => ENV['SENDGRID_PASSWORD'],
-    :address              => "smtp.sendgrid.net",
-    :port                 => 587,
-    :enable_starttls_auto => true,
-    :authentication       => :plain,
-    :domain               => "heroku.com"
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.smtp_settings = 
+  {
+    :address            => 'smtp.gmail.com',
+    :port               => 587,
+    :domain             => 'gmail.com', 
+    :authentication     => :plain,
+    :user_name          => 'gcam021932@coderacademy.edu.au',
+    :password           => ENV['GMAIL_PASSWORD']
   }
 end
