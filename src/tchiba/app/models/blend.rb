@@ -9,7 +9,7 @@ class Blend < ApplicationRecord
 
   has_many :reviews
 
-  has_many_attached :images
+  has_many_attached :image
   
   validates_presence_of :name, :price, :quantity, :descrip, :weight
   validates_numericality_of :price, :weight

@@ -34,7 +34,7 @@ class BlendsController < ApplicationController
 private
 
   def strong_blend_params
-    params.require(:blend).permit(:name, :price, :shipping_cost, :discount_amount, :quantity, :descrip, :weight, :images)
+    params.require(:blend).permit(:name, :price, :shipping_cost, :discount_amount, :quantity, :descrip, :weight, image: [])
   end
 
 end
