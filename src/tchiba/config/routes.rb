@@ -39,7 +39,8 @@ Rails.application.routes.draw do
   #CART ROUTING
   get 'cart/show', to: 'carts#show'
   get 'cart/update', to: 'carts#update_quantity'
-  get 'cart/remove', to: 'carts#remove_item'
+  post 'cart/add/:id', to: 'carts#add_item', as: 'cart_add'
+  post 'cart/remove/:id', to: 'carts#remove_item', as: 'cart_remove'
   get 'cart/checkout', to: 'carts#checkout'
   
 end
