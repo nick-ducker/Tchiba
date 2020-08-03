@@ -110,6 +110,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
+  config.action_mailer.default_url_options = { host: 'sandboxf9ff4e723e1440359581e7991ff13ba4.mailgun.org' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
       api_key: Rails.application.credentials.dig(:mailgun, :api_key),
