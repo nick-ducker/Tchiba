@@ -1,5 +1,12 @@
 <h1><%= @blend.name %></h1>
 <h2>Blend by <%= link_to  @blend.user.name, profile_path(@blend.user) %></h2>
+
+<% if @blend.image.attached? %>
+  <% @blend.image.each do |image| %>
+    <%=  image_tag image %>
+  <% end %>
+<% end %>
+
 <p> <%= @blend.price %> </p>
 <p> <%= @blend.weight %>g </p>
 <p> <%= @blend.shipping_cost %> </p>
@@ -14,7 +21,9 @@
 <% if current_user.id == @blend.user.id %>
   <h3>Administration controls</h3>
   <%= link_to  "Edit", edit_blend_path(@blend) %>
-  <%= link_to  "Delete", blend_path(@blend), method: 'DELETE' %>
+  <%= link_to  "Delete", blend_path(@blend), 
+                        method: 'DELETE',
+                        data: { confirm: 'Are you sure?' } %>
 <% else %>
   <%= link_to  "Leave a review", new_review_path %>
 <% end %>

@@ -31,10 +31,15 @@ class BlendsController < ApplicationController
   def delete_image
     image = ActiveStorage::Attachment.find(params[:id])
     image.purge
+    flash[:alert] = "Image removed"
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
+    blend = Blend.find(params[:id])
+    blend.destroy
+    flash[:alert] = "Blend deleted."
+    redirect_to root_path
   end
 
   def update
