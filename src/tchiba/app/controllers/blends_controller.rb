@@ -3,7 +3,6 @@ class BlendsController < ApplicationController
 
   def create
     if current_user.blends.create(strong_blend_params)
-      #current_user.blends.last.update(properties: params[:blend][:property_ids])
       redirect_to current_user.blends.last
     else
       flash[:alert] = "Could not create blend"

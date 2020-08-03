@@ -20,6 +20,7 @@
 
 <% if current_user.id == @blend.user.id %>
   <h3>Administration controls</h3>
+  Quantity left: <%= @blend.quantity %>
   <%= link_to  "Edit", edit_blend_path(@blend) %>
   <%= link_to  "Delete", blend_path(@blend), 
                         method: 'DELETE',
