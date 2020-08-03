@@ -3,6 +3,7 @@ class BlendsController < ApplicationController
 
   def create
     if current_user.blends.create(strong_blend_params)
+      #current_user.blends.last.update(properties: params[:blend][:property_ids])
       redirect_to current_user.blends.last
     else
       flash[:alert] = "Could not create blend"
@@ -20,6 +21,7 @@ class BlendsController < ApplicationController
   end
 
   def show
+    @blend = Blend.find(params[:id])
   end
 
   def edit
@@ -34,7 +36,7 @@ class BlendsController < ApplicationController
 private
 
   def strong_blend_params
-    params.require(:blend).permit(:name, :price, :shipping_cost, :discount_amount, :quantity, :descrip, :weight, image: [])
+    params.require(:blend).permit(:name, :price, :shipping_cost, :discount_amount, :quantity, :descrip, :weight, property_ids: [], image: [])
   end
 
 end
