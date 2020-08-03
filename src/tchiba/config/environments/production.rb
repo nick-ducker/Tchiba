@@ -115,6 +115,6 @@ Rails.application.configure do
   config.action_mailer.mailgun_settings = {
       api_key: ENV['MAILGUN_API_KEY'],
       domain: 'sandboxf9ff4e723e1440359581e7991ff13ba4.mailgun.org/'
-      :api_host => "api.eu.mailgun.net"
+      api_host: 'api.eu.mailgun.net'
   }
 end
