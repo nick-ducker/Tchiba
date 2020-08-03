@@ -1,11 +1,19 @@
-<h1>Users#show</h1>
-
-<p> Username: <%= @user.name %> </p>
-<p> E-Mail: <%= @user.email %> </p>
-<p> Bio: <%= @user.bio %> </p>
-<% image_tag @user.profilepic if @user.profilepic.attached? %>
+<h1>Account</h1>
 
 <%= link_to 'Profile page', profile_path(@user) %>
 <%= link_to 'Edit Account Details', edit_user_registration_path %>
 <%= link_to 'Your Reviews', review_history_path %>
 <%= link_to 'Your Orders & Transactions', order_history_path %>
+
+<p> Username: <%= @user.name %> </p>
+<p> E-Mail: <%= @user.email %> </p>
+<p> Bio: <%= @user.bio %> </p>
+<% if @user.address %>
+  <% address = @user.address %>
+  <p><%= address.number %> <%= address.street %>, <%= address.suburb %>, <%= address.state %> <%= address.postcode %>
+<% end %>
+<br>
+<%= image_tag @user.profilepic if @user.profilepic.attached? %>
+<%= link_to  "Change profile picture", edit_user_registration_path %>
+
+
