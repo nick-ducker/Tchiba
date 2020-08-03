@@ -1,2 +1,27 @@
-<h1>Carts#show</h1>
-<p>Find me in app/views/carts/show.html.erb</p>
+<h1>Your Cart</h1>
+<% if @cartitems.empty? %>
+  <p>You have nothing in your cart!</p>
+<% else %>
+  <table>
+    <tr>
+      <th>Blend Name</th>
+      <th>Quantity</th>
+      <th>Gross Price</th>
+      <th>Discount</th>
+      <th>Shipping Cost</th>
+      <th>Final Total</th>
+      <th>Checkout?</th>
+    </tr>
+    <% @cartitems.each do |item| %>
+    <tr>
+      <th><%= link_to  item.blend.name, blend_path(item.blend) %></th>
+      <th><%= item.blend_quantity %></th>
+      <th><%= item.gross_price %></th>
+      <th><%= item.total_discount %></th>
+      <th><%= item.blend.shipping_cost %></th>
+      <th><%= item.total_amount %></th>
+      <th><%= link_to  "Checkout this item?", orders_path(item), method: "POST" %></th>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
