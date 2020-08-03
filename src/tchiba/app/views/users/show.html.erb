@@ -8,6 +8,7 @@
 <p> Username: <%= @user.name %> </p>
 <p> E-Mail: <%= @user.email %> </p>
 <p> Bio: <%= @user.bio %> </p>
+<p> Credit: <%= @user.credit %>
 <% if @user.address %>
   <% address = @user.address %>
   <p><%= address.number %> <%= address.street %>, <%= address.suburb %>, <%= address.state %> <%= address.postcode %>
