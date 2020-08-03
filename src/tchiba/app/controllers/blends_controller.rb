@@ -25,12 +25,26 @@ class BlendsController < ApplicationController
   end
 
   def edit
+    @blend = Blend.find(params[:id])
+  end
+
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:id])
+    image.purge
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
   end
 
   def update
+    @blend = Blend.find(params[:id])
+    if @blend.update(strong_blend_params)
+      redirect_to blend_path(@blend)
+    else
+      flash[:alert] = "Could not update blend"
+      render 'edit'
+    end
   end
 
 private

@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   get 'users/profile/:id', to: 'users#profile', as: 'profile'
 
   #BLEND ROUTING
-  resources :blends
+  resources :blends do
+    member do
+      delete :delete_image
+    end
+  end
 
   #CONVERSATION ROUTING
   resources :conversations
