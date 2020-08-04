@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
+  before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy],
 
   def create
     unless current_user.address 
@@ -93,9 +94,6 @@ class OrdersController < ApplicationController
     )
 
     status 200
-  end
-
-  def update
   end
 
   def destroy
