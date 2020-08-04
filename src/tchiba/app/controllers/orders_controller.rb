@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
     if @paid && @order.paid == false
       @order.update(paid: true)
-      @order.cart_item.blend.update(quantity: -= 1)
+      @order.cart_item.blend.update(quantity: -= @order.cart_item.blend_quantity)
     end
 
     # STRIPE PAYMENT SETUP
