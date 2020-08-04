@@ -33,9 +33,9 @@ class OrdersController < ApplicationController
        x >= @order.total ? (@paid = true) : (@paid = false)
     end
 
-    if @paid
+    if @paid && @order.paid == false
       @order.update(paid: true)
-      @order.cart_item.blend.quantity -= 1
+      @order.cart_item.blend.update(quantity: -= 1)
     end
 
     # STRIPE PAYMENT SETUP
