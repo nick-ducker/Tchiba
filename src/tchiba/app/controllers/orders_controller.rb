@@ -96,6 +96,12 @@ class OrdersController < ApplicationController
     status 200
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.update(shipped: true)
+    redirect_to order_path(order)
+  end
+
   def destroy
     order = Order.find(params[:id])
     order.destroy

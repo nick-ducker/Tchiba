@@ -31,6 +31,10 @@
   <h2>This Order is awaiting payment from the buyer</h2>
 <% end %>
 
+<% if @order.seller_id == current_user.id && @order.shipped == false %>
+  <%= link_to  "Change Status to Shipped", order_path(@order), method: "PATCH",
+                                                              data: {confirm: "Are you sure? You won't be able to undo this."} %>
+<% end %>
 
 <% if @transactions %>
   <% @transactions.each do |transact| %>
