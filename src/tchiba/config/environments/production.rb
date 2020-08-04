@@ -130,4 +130,6 @@ Rails.application.configure do
     :user_name          => 'tchiba.app@gmail.com',
     :password           => ENV['GMAIL_PASSWORD']
   }
+
+  Stripe.api_key = ENV['SECRET_KEY']
 end

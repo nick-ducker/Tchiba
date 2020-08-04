@@ -73,4 +73,6 @@ Rails.application.configure do
   # }
 
   config.action_mailer.perform_deliveries = true
+
+  Stripe.api_key = Rails.application.credentials.dig(:stripe, :secret_key)
 end
