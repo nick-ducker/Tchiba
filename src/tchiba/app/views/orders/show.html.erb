@@ -1,6 +1,6 @@
 <h1>Order no. <%= @order.id %></h1>
 
-<% unless @paid %>
+<% unless @paid || @order.seller_id == current_user.id %>
   <button data-stripe="payment">
   Pay <%= number_to_currency(@order.total) %>
 </button>
@@ -20,6 +20,10 @@
       });
     });
 </script>
+
+<%= link_to  "Cancel Order", order_path(@order), method: "DELETE",
+                                                data: {confirm: "Are you sure?"} %>
+
 <% else %>
   <h2>This order has been paid for!</h2>
 <% end %>

@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
-  before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy],
+  before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy]
 
   def create
     unless current_user.address 
       flash[:alert] = "You need to register an address before you can checkout"
-      redirect_to edit_user_registration_path
+      redirect_to edit_user_registration_path and return
     end
 
     @cartitem = CartItem.find(params[:id])
@@ -97,5 +97,9 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    order = Order.find(params[:id])
+    order.destroy
+    flash[:alert] = "Order Cancelled"
+    redirect_to cart_show_path
   end
 end
