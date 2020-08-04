@@ -2,24 +2,24 @@
 
 <% unless @paid %>
   <button data-stripe="payment">
-    Pay for order <%= number_to_currency(@order.total) %>
-  </button>
+  Pay <%= number_to_currency(@order.total) %>
+</button>
 
-  <script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"></script>
 
-  <script>
-    document
-      .querySelector("[data-stripe='payment']")
-      .addEventListener("click", () => {
-        const stripe = Stripe(
-          "<%= ENV['STRIPE_PUBLIC_KEY'] %>"
-        );
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= ENV['PUBLISHABLE_KEY'] %>"
+      );
 
-        stripe.redirectToCheckout({
-          sessionId: "<%= @session_id %>"
-        });
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
       });
-  </script>
+    });
+</script>
 <% else %>
   <h2>This order has been paid for!</h2>
 <% end %>
