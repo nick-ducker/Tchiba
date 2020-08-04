@@ -9,9 +9,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    unless current_user.cart
+      current_user.create_cart
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy
