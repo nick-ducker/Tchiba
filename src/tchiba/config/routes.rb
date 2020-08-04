@@ -48,6 +48,5 @@ Rails.application.routes.draw do
   patch 'cart/update/:id', to: 'carts#update_quantity', as: 'cart_update'
   post 'cart/add/:id', to: 'carts#add_item', as: 'cart_add'
   post 'cart/remove/:id', to: 'carts#remove_item', as: 'cart_remove'
-  get 'cart/checkout', to: 'carts#checkout'
   
 end

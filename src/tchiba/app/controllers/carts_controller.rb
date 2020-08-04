@@ -3,6 +3,10 @@ class CartsController < ApplicationController
   before_action :set_cart_item, only: [:update_quantity, :remove_item]
 
   def show
+    unless current_user.cart
+      current_user.create_cart
+    end
+
     @cartitems = current_user.cart.cart_items
     n = 0
     @cartitems.each{|x| x.order ? n += 1 : nil}
@@ -19,9 +23,6 @@ class CartsController < ApplicationController
     @cartitem.destroy
     flash[:alert] = "Blend removed from cart"
     redirect_back(fallback_location: root_path)
-  end
-
-  def checkout
   end
 
 private

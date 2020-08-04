@@ -49,6 +49,10 @@ class OrdersController < ApplicationController
       end
       @paid = true if x == @order.total 
     end
+
+    if @paid
+      @order.blend.quantity -= 1
+    end
   end
 
   def successful_payment
