@@ -29,7 +29,7 @@
           <th><%= item.total_discount %></th>
           <th><%= item.blend.shipping_cost %></th>
           <th><%= item.total_amount %></th>
-          <th><%= link_to  "Checkout this item?", orders_path(item), method: "POST" %></th>
+          <th><%= link_to  "Checkout this item?", orders_path(id: item.id), method: "POST" %></th>
           <th><%= link_to  "X", cart_remove_path(item), method: "POST",
                                                         data: { confirm: 'Are you sure?' } %>
         </tr>
