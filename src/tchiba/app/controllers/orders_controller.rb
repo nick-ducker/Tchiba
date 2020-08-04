@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
       paid: true
     )
 
-    status: 200
+    render status: 200
   end
 
   def update
