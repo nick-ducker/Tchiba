@@ -22,6 +22,24 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
 
+    if @order.transactions
+      @transactions = @order.transactions
+      x = 0
+      @transactions.each do |trans|
+        if trans.paid
+          x += trans.amount
+        end
+      end
+       x >= @order.total ? (@paid = true) : (@paid = false)
+    end
+
+    if @paid
+      @order.update(paid: true)
+      @order.cart_item.blend.quantity -= 1
+    end
+
+    # STRIPE PAYMENT SETUP
+
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email: current_user.email,
@@ -45,21 +63,6 @@ class OrdersController < ApplicationController
 
     @session_id = session.id
 
-    if @order.transactions
-      @transactions = @order.transactions
-      x = 0
-      @transactions.each do |trans|
-        if trans.paid
-          x += trans.amount
-        end
-      end
-       x == @order.total ? (@paid = true) : (@paid = false)
-    end
-
-    if @paid
-      @order.update(paid: true)
-      @order.cart_item.blend.quantity -= 1
-    end
   end
 
   def successful_payment
