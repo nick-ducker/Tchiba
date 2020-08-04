@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
       paid: true
     )
 
-    render status: 200
+    head 200
   end
 
   def update
