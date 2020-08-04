@@ -1,9 +1,6 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
 
-  def new
-  end
-
   def create
     @cartitem = CartItem.find(params[:id])
     @cartitem.create_order(

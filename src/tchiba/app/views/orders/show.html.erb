@@ -20,12 +20,14 @@
         });
       });
   </script>
+<% else %>
+  <h2>This order has been paid for!</h2>
 <% end %>
 
 <% if @transactions %>
   <% @transactions.each do |transact| %>
     <%= transact.updated_at %><br>
-    <%= number_to_currency(transact.amount) %>
-    <%= transact.paid %>
+    <%= number_to_currency(transact.amount) %><br>
+    <%= transact.paid %><br>
   <% end %>
 <% end %>
