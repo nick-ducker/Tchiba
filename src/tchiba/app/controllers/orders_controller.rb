@@ -2,6 +2,11 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
 
   def create
+    unless current_user.address 
+      flash[:alert] = "You need to register an address before you can checkout"
+      redirect_to edit_user_registration_path
+    end
+
     @cartitem = CartItem.find(params[:id])
     @cartitem.create_order(
       buyer_id: current_user.id,
