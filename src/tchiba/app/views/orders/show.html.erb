@@ -1,2 +1,31 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<h1>Order no. <%= @order.id %></h1>
+
+<% unless @paid %>
+  <button data-stripe="payment">
+    Pay for order <%= number_to_currency(@order.total) %>
+  </button>
+
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <script>
+    document
+      .querySelector("[data-stripe='payment']")
+      .addEventListener("click", () => {
+        const stripe = Stripe(
+          "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+        );
+
+        stripe.redirectToCheckout({
+          sessionId: "<%= @session_id %>"
+        });
+      });
+  </script>
+<% end %>
+
+<% if @transactions %>
+  <% @transactions.each do |transact| %>
+    <%= transact.updated_at %><br>
+    <%= number_to_currency(transact.amount) %>
+    <%= transact.paid %>
+  <% end %>
+<% end %>

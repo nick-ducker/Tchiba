@@ -31,7 +31,14 @@ Rails.application.routes.draw do
   post '/conversations/:id', to: 'conversations#add'
   
   #ORDER ROUTING
-  resources :orders
+  resources :orders do
+    member do
+      get :successful_payment
+      get :failed_payment
+    end
+  end
+  post "/orders/webhook", to: "orders#webhook"
+
   
   #REVIEW ROUTING
   resources :reviews
