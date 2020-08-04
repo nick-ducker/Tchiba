@@ -19,7 +19,12 @@
       <% else %>
         <tr>
           <th><%= link_to  item.blend.name, blend_path(item.blend) %></th>
-          <th><%= item.blend_quantity %></th>
+          <th>
+            <%= form_with model: item, url: cart_update_path(item), local: true do |f|%>
+              <%= f.number_field :blend_quantity %>
+              <%= f.submit 'Update' %>
+            <% end %>
+          </th>
           <th><%= item.gross_price %></th>
           <th><%= item.total_discount %></th>
           <th><%= item.blend.shipping_cost %></th>

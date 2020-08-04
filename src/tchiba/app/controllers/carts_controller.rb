@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :authenticate
+  before_action :set_cart_item, only: [:update_quantity, :remove_item]
 
   def show
     @cartitems = current_user.cart.cart_items
@@ -9,15 +10,28 @@ class CartsController < ApplicationController
   end
 
   def update_quantity
+    @cartitem.update(strong_cart_update_params)
+    flash[:alert] = "Quantity updated"
+    redirect_back(fallback_location: root_path)
   end
 
   def remove_item
-    cartitem = CartItem.find(params[:id])
-    cartitem.destroy
+    @cartitem.destroy
     flash[:alert] = "Blend removed from cart"
     redirect_back(fallback_location: root_path)
   end
 
   def checkout
   end
+
+private
+
+  def strong_cart_update_params
+    params.require(:cart_item).permit(:blend_quantity)
+  end
+
+  def set_cart_item
+    @cartitem = CartItem.find(params[:id])
+  end
+
 end
