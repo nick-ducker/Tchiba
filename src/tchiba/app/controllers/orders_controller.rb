@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
           x += trans.amount
         end
       end
-      @paid = true if x == @order.total 
+       x == @order.total ? (@paid = true) : (@paid = false)
     end
 
     if @paid
