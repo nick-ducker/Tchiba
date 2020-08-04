@@ -21,7 +21,7 @@
           <th><%= link_to  item.blend.name, blend_path(item.blend) %></th>
           <th>
             <%= form_with model: item, url: cart_update_path(item), local: true do |f|%>
-              <%= f.number_field :blend_quantity %>
+              <%= f.number_field :blend_quantity, min: 1 %>
               <%= f.submit 'Update' %>
             <% end %>
           </th>

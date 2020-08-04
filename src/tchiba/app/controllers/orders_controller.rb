@@ -51,7 +51,8 @@ class OrdersController < ApplicationController
     end
 
     if @paid
-      @order.blend.quantity -= 1
+      @order.update(paid: true)
+      @order.cart_item.blend.quantity -= 1
     end
   end
 
@@ -85,6 +86,8 @@ class OrdersController < ApplicationController
       amount: amount / 100,
       paid: true
     )
+
+    status 200
   end
 
   def update

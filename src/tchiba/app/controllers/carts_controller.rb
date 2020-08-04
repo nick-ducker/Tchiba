@@ -14,7 +14,7 @@ class CartsController < ApplicationController
   end
 
   def update_quantity
-    @cartitem.update(strong_cart_update_params)
+    @cartitem.update(strong_cart_params)
     flash[:alert] = "Quantity updated"
     redirect_back(fallback_location: root_path)
   end
@@ -25,10 +25,16 @@ class CartsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def add_item
+    current_user.cart.cart_items.create(strong_cart_params)
+    flash[:alert] = "Blend added to cart"
+    redirect_back(fallback_location: root_path)
+  end
+
 private
 
-  def strong_cart_update_params
-    params.require(:cart_item).permit(:blend_quantity)
+  def strong_cart_params
+    params.require(:cart_item).permit(:blend_quantity, :blend_id)
   end
 
   def set_cart_item

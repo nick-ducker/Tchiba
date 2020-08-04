@@ -26,5 +26,10 @@
                         method: 'DELETE',
                         data: { confirm: 'Are you sure?' } %>
 <% else %>
+  <%= form_with model: @cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
+    <%= f.hidden_field :blend_id, value: @blend.id %>
+    <%= f.number_field :blend_quantity, in: 1..100, step: 1 %>
+    <%= f.submit "Add to Cart" %>
+  <% end %>
   <%= link_to  "Leave a review", new_review_path %>
 <% end %>

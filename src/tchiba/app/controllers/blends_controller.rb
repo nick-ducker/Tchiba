@@ -21,6 +21,7 @@ class BlendsController < ApplicationController
 
   def show
     @blend = Blend.find(params[:id])
+    @cart_item = CartItem.new
   end
 
   def edit
