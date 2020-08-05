@@ -27,6 +27,11 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    review = Review.find(params[:id])
+    blend = Blend.find(review.blend.id)
+    review.destroy
+    blend.update(totalrating: blend.aggregate_ratings)
+    redirect_to blend_path(blend)
   end
 
 private

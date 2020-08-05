@@ -40,5 +40,9 @@
     <%= review.rating %><br>
     <%= review.descrip %><br>
     <%= review.created_at %><br>
+    <% if review.user.id == current_user.id %>
+      <%= link_to  "Delete Review", review_path(review), method: "DELETE",
+                                                        data: { confirm: 'Are you sure?' } %>
+    <% end %>
   <% end %>
 <% end %>
