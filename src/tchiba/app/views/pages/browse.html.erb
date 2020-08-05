@@ -1,1 +1,7 @@
 <h1>Browse Page</h1>
+
+<% @blends.each do |blend| %>
+
+  <%= link_to  blend.name, blend_path(blend) %>
+
+<% end %>
