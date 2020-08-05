@@ -34,3 +34,11 @@
   <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
 <% end %>
 
+<% if @blend.reviews %>
+  <% @blend.reviews.each do |review| %>
+    <%= review.user.name %><br>
+    <%= review.rating %><br>
+    <%= review.descrip %><br>
+    <%= review.created_at %><br>
+  <% end %>
+<% end %>
