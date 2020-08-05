@@ -6,7 +6,7 @@
     <%=  image_tag image %>
   <% end %>
 <% end %>
-
+<p> <%= @blend.totalrating %> </p>
 <p> <%= @blend.price %> </p>
 <p> <%= @blend.weight %>g </p>
 <p> <%= @blend.shipping_cost %> </p>
@@ -31,5 +31,6 @@
     <%= f.number_field :blend_quantity, in: 1..100, step: 1 %>
     <%= f.submit "Add to Cart" %>
   <% end %>
-  <%= link_to  "Leave a review", new_review_path %>
+  <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
 <% end %>
+

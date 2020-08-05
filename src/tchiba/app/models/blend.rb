@@ -14,4 +14,10 @@ class Blend < ApplicationRecord
   validates_presence_of :name, :price, :quantity, :descrip, :weight
   validates_numericality_of :price, :weight
 
+  def aggregate_ratings
+    reviews = self.reviews.all
+    rating = reviews.average(:rating)
+    return rating.round(2)
+  end
+
 end
