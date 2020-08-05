@@ -17,13 +17,8 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def show
+    @review = Review.find(params[:id])
   end
 
   def destroy
