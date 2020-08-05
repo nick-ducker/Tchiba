@@ -11,3 +11,13 @@
   <%= link_to  "Create Blend", new_blend_path %>
   <%= link_to  "Cart", user_session_path %>
 <% end %>
+
+<%= form_with scope: :browse, url: browse_path, local: true do |f| %>
+<%= f.label :search %>
+<%= f.text_field :search %><br>
+<%= f.label :tea_ids, 'Tea Type' %>
+<%= f.collection_select :tea_ids, Property.where("id < ?", 11), :id, :name %><br>
+<%= f.label :flavour_ids, 'Flavour' %>
+<%= f.collection_select :flavour_ids, Property.where("id > ?", 10), :id, :name %><br>
+<%= f.submit "Search"%>
+<% end %>

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get '/contact', to: 'pages#contact'
   get '/admindash', to: 'pages#admindashboard'
 
-  get '/browse', to: 'pages#browse'
+  get '/browse', to: 'pages#browse', as: 'browse'
+  post '/browse', to: 'pages#search'
 
   #USER ROUTING
   get 'users/account', to: 'users#show', as: 'account'

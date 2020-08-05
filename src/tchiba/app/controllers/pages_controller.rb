@@ -12,4 +12,7 @@ class PagesController < ApplicationController
   def browse
   end
 
+  def search
+  end
+
 end
