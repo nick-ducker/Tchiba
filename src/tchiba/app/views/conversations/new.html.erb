@@ -1,2 +1,8 @@
-<h1>Conversations#new</h1>
-<p>Find me in app/views/conversations/new.html.erb</p>
+<h1>Ask a question</h1>
+
+<%= form_with model: @message, url: conversation_path(@conversation), local: true do |f| %>
+  <%= f.hidden_field :conversation_id, value: @conversation.id %>
+  <p>Ask a question about <%= @blend.name %></p>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>

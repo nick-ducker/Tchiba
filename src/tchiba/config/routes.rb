@@ -29,8 +29,8 @@ Rails.application.routes.draw do
 
   #CONVERSATION ROUTING
   resources :conversations
-  post '/conversations/:id', to: 'conversations#add'
-  
+  post '/conversations/:id', to: 'conversations#add', as: 'add_message'
+  patch '/inactive/:id', to: 'conversations#inactive', as: 'inactive'
   #ORDER ROUTING
   resources :orders do
     member do

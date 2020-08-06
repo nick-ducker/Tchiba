@@ -1,13 +1,30 @@
 <h1>Inbox</h1>
-<% if @conversations %>
-  <% @conversations.each do |convo| %>
+
+<% unless @to_conversations.empty? %>
+  <h3>Questions you have been asked</h3>
+  <% @to_conversations.each do |convo| %>
+    <p>From: <%= convo.from_user.name %></p>
+    <p><%= convo.messages.last.content %></p>
+    <%= link_to  "See full conversation", conversation_path(convo) %>
     <% if convo.is_active %>
-      <p>From: <%= convo.from_user.name %></p>
-      <p><%= convo.messages.last.content %></p>
-      <%= link_to  "See full conversation", conversation_path(convo) %>
+      <%= link_to  "Mark conversation as in-active", inactive_path(convo), method: "PATCH",
+                                                                          data: {confirm: "Are you sure? You will not be able to add new messages to the conversation if you do this."} %>
     <% end %>
+    <%= link_to  "Delete conversation", conversation_path(convo), method: "DELETE",
+                                                                data: {confirm: "Are you sure you want to delete this conversation?"}   %>
   <% end %>
 <% else %>
-  <p>You have nothing in your inbox</p>
+  <p>You haven't been asked any questions</p>
+<% end %>
+
+<% unless @from_conversations.empty? %>
+  <h3>Questions you have asked</h3>
+  <% @from_conversations.each do |convo| %>
+      <p>To: <%= convo.to_user.name %></p>
+      <p><%= convo.messages.last.content %></p>
+      <%= link_to  "See full conversation", conversation_path(convo) %>
+  <% end %>
+<% else %>
+  <p>You haven't asked any questions</p>
 <% end %>
 

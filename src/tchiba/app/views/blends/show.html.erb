@@ -32,6 +32,7 @@
     <%= f.submit "Add to Cart" %>
   <% end %>
   <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
+  <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id) %>
 <% end %>
 
 <% if @blend.reviews %>
