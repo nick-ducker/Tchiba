@@ -16,10 +16,20 @@ class PagesController < ApplicationController
   end
 
   def search
-    if search_params.empty?
-      redirect_to browse_path
-    end
+    redirect_to browse_path if search_params.empty?
+    property_ids = get_property_ids
+    @pagy, @blends = pagy(search_function(search_params[:search], property_ids))
+    
+    render 'browse'
+  end
 
+private
+
+  def search_params
+    params.require(:browse).permit(:search, :tea_ids, :flavour_ids, tea_ids: [], flavour_ids: [])
+  end
+
+  def get_property_ids
     property_ids = Array.new
     
     if search_params[:tea_ids].size > 0
@@ -27,8 +37,6 @@ class PagesController < ApplicationController
         property_ids << search_params[:tea_ids].to_i
       else
         search_params[:tea_ids].each{|id| property_ids << id.to_i if id.to_i > 0}
-        p property_ids
-        puts 2
       end 
     end
 
@@ -37,21 +45,9 @@ class PagesController < ApplicationController
         property_ids << search_params[:flavour_ids].to_i
       else
         search_params[:flavour_ids].each{|id| property_ids << id.to_i if id.to_i > 0}
-        p property_ids
-        puts 2
       end
     end
-
-    @pagy, @blends = pagy(search_function(search_params[:search], property_ids))
-    
-    render 'browse'
-
-  end
-
-private
-
-  def search_params
-    params.require(:browse).permit(:search, :tea_ids, :flavour_ids, tea_ids: [], flavour_ids: [])
+    return property_ids
   end
 
   def search_function(search_term, property_ids)
@@ -70,6 +66,8 @@ private
       property_ids.shift
       return blends_relation if blends_relation.empty? || property_ids.empty?
     end
+
+    return blends_relation
   end
 
 end
