@@ -51,18 +51,22 @@ private
   end
 
   def search_function(search_term, property_ids)
-    
+    term = false
     if search_term.length > 0
       blends_relation = Blend.where("blends.name LIKE ?", "%#{search_term}%")
+      term = true
       return blends_relation if blends_relation.empty?
     else
       blends_relation = Blend.joins(:properties).where("properties.id = ?", property_ids[0])
       property_ids.shift
       return blends_relation if blends_relation.empty? || property_ids.empty?
     end
-
     until property_ids.empty?
-      blends_relation = Blend.joins(:properties).where("properties.id = ?", property_ids[0])
+      if term
+        blends_relation = Blend.where("blends.name LIKE ?", "%#{search_term}%").joins(:properties).where("properties.id = ?", property_ids[0])
+      else
+        blends_relation = Blend.joins(:properties).where("properties.id = ?", property_ids[0])   
+      end
       property_ids.shift
       return blends_relation if blends_relation.empty? || property_ids.empty?
     end
