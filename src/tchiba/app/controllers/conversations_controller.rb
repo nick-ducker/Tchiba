@@ -1,5 +1,8 @@
 class ConversationsController < ApplicationController
+  before_action :authenticate
+  
   def index
+    @coversations = Conversation.where(to_user_id: current_user.id)
   end
 
   def show
@@ -15,5 +18,10 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+
+  def set_conversation
   end
 end

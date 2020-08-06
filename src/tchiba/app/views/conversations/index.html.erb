@@ -1,2 +1,13 @@
-<h1>Conversations#index</h1>
-<p>Find me in app/views/conversations/index.html.erb</p>
+<h1>Inbox</h1>
+<% if @conversations %>
+  <% @conversations.each do |convo| %>
+    <% if convo.is_active %>
+      <p>From: <%= convo.from_user.name %></p>
+      <p><%= convo.messages.last.content %></p>
+      <%= link_to  "See full conversation", conversation_path(convo) %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>You have nothing in your inbox</p>
+<% end %>
+
