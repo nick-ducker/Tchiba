@@ -4,7 +4,8 @@
   <%= link_to "Account", account_path %>
   <%= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
   <%= link_to  "Create Blend", new_blend_path %>
-  <%= link_to  "Cart", cart_show_path %>:
+  <%= link_to  "Cart", cart_show_path %>
+  <%= link_to  "Browse", browse_path %>
 <% else %>
   <%= link_to "Login", user_session_path %>
   <%= link_to "Sign-up", new_user_registration_path %>

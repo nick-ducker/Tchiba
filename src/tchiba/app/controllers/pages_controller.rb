@@ -15,6 +15,10 @@ class PagesController < ApplicationController
   end
 
   def search
+    if search_params.empty?
+      redirect_to browse_path
+    end
+
     property_ids = Array.new
     
     if search_params[:tea_ids].size > 0
@@ -27,30 +31,6 @@ class PagesController < ApplicationController
 
     
     @blends = search_function(search_params[:search], property_ids)
-      
-
-    # case 
-    #   when search_params[:search].length > 0 && tea_ids && flavour_ids
-    #     tea_ids.each do |tea_filter|
-    #       flavour_ids.each do |flavour_filter|
-    #         blends = Blend.joins(:properties).where("properties.id = ?", tea_filter).where("properties.id = ?", flavour_filter)
-    #         #.where("blends.name LIKE ?", search_params[:search])
-    #         puts blends
-    #         if blends.length >= 1
-    #           blends.each{|b| @blends << b}
-    #         end
-    #       end
-    #     end
-
-      # when params[:search].length > 0 && params[:tea_ids].length > 0
-      #   params[:tea_ids].each do |tea_filter|
-      #      blends = Blend.joins(:properties).where("name like ?", "%#{params[:search]}%").where("properties.id = ?", tea_filter)
-      #       if blends.length >= 1
-      #         blends.each{|b| @blends << b}
-      #       end
-      #   end
-      
-    # end
 
     render 'browse'
 
