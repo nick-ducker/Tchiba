@@ -12,6 +12,7 @@ class PagesController < ApplicationController
   end
 
   def browse
+    @pagy, @blends = pagy(Blend.all)
   end
 
   def search
@@ -29,9 +30,8 @@ class PagesController < ApplicationController
       search_params[:flavour_ids].split.length == 1 ? property_ids << search_params[:flavour_ids].to_i : search_params[:flavour_ids].each{|id| property_ids << id.to_i}
     end
 
+    @pagy, @blends = pagy(search_function(search_params[:search], property_ids))
     
-    @blends = search_function(search_params[:search], property_ids)
-
     render 'browse'
 
   end

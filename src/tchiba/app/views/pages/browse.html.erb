@@ -2,6 +2,12 @@
 
 <% @blends.each do |blend| %>
 
-  <%= link_to  blend.name, blend_path(blend) %>
+  <%= link_to  blend.name, blend_path(blend) %><br>
 
 <% end %>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+
+
+
+
