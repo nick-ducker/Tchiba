@@ -23,11 +23,23 @@ class PagesController < ApplicationController
     property_ids = Array.new
     
     if search_params[:tea_ids].size > 0
-      search_params[:tea_ids].split.length == 1 ? property_ids << search_params[:tea_ids].to_i : search_params[:tea_ids].each{|id| property_ids << id.to_i}
+      if search_params[:tea_ids].class == String
+        property_ids << search_params[:tea_ids].to_i
+      else
+        search_params[:tea_ids].each{|id| property_ids << id.to_i if id.to_i > 0}
+        p property_ids
+        puts 2
+      end 
     end
 
     if search_params[:flavour_ids].size > 0 
-      search_params[:flavour_ids].split.length == 1 ? property_ids << search_params[:flavour_ids].to_i : search_params[:flavour_ids].each{|id| property_ids << id.to_i}
+      if search_params[:flavour_ids].class == String
+        property_ids << search_params[:flavour_ids].to_i
+      else
+        search_params[:flavour_ids].each{|id| property_ids << id.to_i if id.to_i > 0}
+        p property_ids
+        puts 2
+      end
     end
 
     @pagy, @blends = pagy(search_function(search_params[:search], property_ids))
@@ -39,7 +51,7 @@ class PagesController < ApplicationController
 private
 
   def search_params
-    params.require(:browse).permit(:search, :tea_ids, :flavour_ids)
+    params.require(:browse).permit(:search, :tea_ids, :flavour_ids, tea_ids: [], flavour_ids: [])
   end
 
   def search_function(search_term, property_ids)
