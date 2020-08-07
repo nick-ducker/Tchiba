@@ -75,4 +75,5 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   Stripe.api_key = Rails.application.credentials.dig(:stripe, :secret_key)
+  ENV['PUBLISHABLE_KEY'] = 'pk_test_KKayczSVbm3zlV2ASwBqHd6d00vLtGa02B'
 end

@@ -1,0 +1,22 @@
+<div class="row">  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Order</th>
+        <th scope="col">Paid?</th>
+        <th scope="col">Shipped?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% collection.each do |order| %>
+        <tr>
+          <th scope="row"><%= order.created_at.to_date %></th>
+          <td><%= link_to 'Order Contents', order_path(order), class: 'btn btn-info btn-sm' %></td>
+          <td><%= order.paid ? "Paid" : "Not Paid" %></td>
+          <td><%= order.shipped ? "Shipped" : "Not Shipped" %></td>
+        </tr>
+      <% end %>
+    <tbody>
+  </table>
+</div>

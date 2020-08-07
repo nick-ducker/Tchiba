@@ -1,37 +1,38 @@
-<h1>Users#ordertransactionhistory</h1>
+<div class='container height'>
+  <div class='spacer'></div>
+  <div class='row h-100 align-items-center justify-content-center'>
+    <div class='col-10 col-md-6 my-3 primary d-flex flex-column align-items-center justify-content-center'>
+      
+      <div class='row'>
+      <h3>Orders</h3>
+      </div>
 
-<h2>Your buying orders </h2>
-<% @buyerorders.each do |order| %>
-  <%= link_to 'Order Contents', order_path(order) %>
-  <p>Shipping to: <%= order.buyer.address.number %>, <%= order.buyer.address.street %>, <%= order.buyer.address.suburb %>, <%= order.buyer.address.state %> <%= order.buyer.address.postcode %> </p>
-  <p>Shipping status: <%= order.shipped ? "Shipped" : "Not Shipped" %> </p>
-  <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
-  <p>Date of Order: <%= order.created_at %>
-<% end %>
+      <div class='row'>
+      <h5><strong>Buying</strong></h5>
+      </div>
+      <%= render 'shared/orders', collection: @buyerorders %>
+      
+      <div class='row'>
+      <h5><strong>Selling</strong></h5>
+      </div>
+      <%= render 'shared/orders', collection: @sellerorders %>
 
-<h2>Your selling orders </h2>
-<% @sellerorders.each do |order| %>
-  <%= link_to 'Order Contents', order_path(order) %>
-  <p>Shipping to: <%= order.buyer.address.number %>, <%= order.buyer.address.street %>, <%= order.buyer.address.suburb %>, <%= order.buyer.address.state %> <%= order.buyer.address.postcode %> </p>
-  <p>Shipping status: <%= order.shipped ? "Shipped" : "Not Shipped" %> </p>
-  <p>Payment status: <%= order.paid ? "Paid" : "Not Paid" %> </p>
-  <p>Date of Order: <%= order.created_at %>
-<% end %>
+      <hr>
 
-<h2>Your buyer transactions </h2>
-<% @buyertransactions.each do |transact| %>
-  <% if transact.paid %>
-  <p><%= transact.is_refund ? "+" : "-" %><%= transact.amount %></p>
-  <%= link_to 'Order', order_path(transact.order) %></p>
-  <p>Paid on:<%= transact.updated_at %></p>
-  <% end %>
-<% end %>
+      <div class='row'>
+      <h3>Transactions</h3>
+      </div>
+      
+      <div class='row'>
+      <h5><strong>Buyer</strong></h5>
+      </div>
+      <%= render 'shared/transactions', collection: @buyertransactions %>
 
-<h2>Your sellertransactions </h2>
-<% @sellertransactions.each do |transact| %>
-  <% if transact.paid %>
-  <p><%= transact.is_refund ? "-" : "+" %><%= transact.amount %></p>
-  <%= link_to 'Order', order_path(transact.order) %></p>
-  <p>Paid on:<%= transact.updated_at %></p>
-  <% end %>
-<% end %>
+      <div class='row'>
+      <h5><strong>Seller</strong></h5>
+      </div>
+      <%= render 'shared/transactions', collection: @sellertransactions %>
+
+    </div>
+  </div>
+</div>

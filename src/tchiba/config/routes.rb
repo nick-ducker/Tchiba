@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :conversations
   post '/conversations/:id', to: 'conversations#add', as: 'add_message'
   patch '/inactive/:id', to: 'conversations#inactive', as: 'inactive'
+
   #ORDER ROUTING
   resources :orders do
     member do
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
     end
   end
   post "/orders/webhook", to: "orders#webhook"
-
   
   #REVIEW ROUTING
   resources :reviews

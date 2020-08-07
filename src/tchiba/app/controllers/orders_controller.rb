@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
   before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy]
-
+  before_action :cart_count, only: [:show]
   def create
     unless current_user.address 
       flash[:alert] = "You need to register an address before you can checkout"
@@ -22,46 +22,34 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
 
-    if @order.transactions
-      @transactions = @order.transactions
-      x = 0
-      @transactions.each do |trans|
-        if trans.paid
-          x += trans.amount
-        end
-      end
-       x >= @order.total ? (@paid = true) : (@paid = false)
-    end
-
-    if @paid && @order.paid == false
-      @order.update(paid: true)
-      @order.cart_item.blend.update(quantity: (@order.cart_item.blend.quantity - @order.cart_item.blend_quantity))
-    end
+    @paid = @order.paid
 
     # STRIPE PAYMENT SETUP
+    unless @paid
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+            name: @order.cart_item.blend.name,
+            description: @order.cart_item.blend.descrip,
+            amount: (@order.total * 100).to_i,
+            currency: 'aud',
+            quantity: 1,
+        }],
+        payment_intent_data: {
+            metadata: {
+                user_id: current_user.id,
+                blend_id: @order.cart_item.blend.id,
+                order_id: @order.id,
+                cart_item_id: @order.cart_item.id
+            }
+        },
+        success_url: "#{root_url}orders/#{@order.id}/successful_payment",
+        cancel_url: "#{root_url}orders/#{@order.id}/failed_payment?amount=#{@order.total}"
+      )
 
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email: current_user.email,
-      line_items: [{
-          name: @order.cart_item.blend.name,
-          description: @order.cart_item.blend.descrip,
-          amount: (@order.total * 100).to_i,
-          currency: 'aud',
-          quantity: 1,
-      }],
-      payment_intent_data: {
-          metadata: {
-              user_id: current_user.id,
-              blend_id: @order.cart_item.blend.id,
-              order_id: @order.id
-          }
-      },
-      success_url: "#{root_url}orders/#{@order.id}/successful_payment",
-      cancel_url: "#{root_url}orders/#{@order.id}/failed_payment?amount=#{@order.total}"
-    )
-
-    @session_id = session.id
+      @session_id = session.id
+    end
 
   end
 
@@ -89,12 +77,35 @@ class OrdersController < ApplicationController
     user_id = payment.metadata.user_id
     blend_id = payment.metadata.blend_id
     order_id = payment.metadata.order_id
+    cart_item_id = payment.metadata.cart_item_id
 
-    Transaction.create(
+    @order = Order.find(order_id)
+
+    trans = Transaction.new(
       order_id: order_id,
       amount: amount / 100,
       paid: true
     )
+
+    trans.save
+
+    if @order.transactions
+      @transactions = @order.transactions
+      x = 0
+      @transactions.each do |trans|
+        if trans.paid
+          x += trans.amount
+        end
+      end
+       x >= @order.total ? (@paid = true) : (@paid = false)
+    end
+
+    if @paid && @order.paid == false
+      @order.update(paid: true)
+      @order.cart_item.blend.update(quantity: (@order.cart_item.blend.quantity - @order.cart_item.blend_quantity))
+      Order.update(cart_item_id: nil)
+      CartItem.find(cart_item_id).destroy
+    end
 
     head 200
   end
