@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   before_action :authenticate
   before_action :set_cart_item, only: [:update_quantity, :remove_item]
+  after_action :cart_count, only: [:update_quantity, :add_item, :remove_item]
 
   def show
     @cartitems = current_user.cart.cart_items

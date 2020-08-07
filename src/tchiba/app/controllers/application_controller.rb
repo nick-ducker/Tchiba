@@ -15,7 +15,20 @@ class ApplicationController < ActionController::Base
     if current_user
       unless current_user.cart
         current_user.create_cart
+        cart_count
       end
+    end
+  end
+
+  def cart_count
+      count = 0
+      unless current_user.cart.cart_items.empty?
+      current_user.cart.cart_items.each do |cart_item|
+        count += cart_item.blend_quantity
+        session[:count] = count
+      end
+    else 
+      session[:count] = 0
     end
   end
 
