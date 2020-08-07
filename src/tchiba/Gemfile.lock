@@ -58,7 +58,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    autoprefixer-rails (9.8.5)
+    autoprefixer-rails (9.8.6.1)
       execjs
     aws-eventstream (1.1.0)
     aws-partitions (1.345.0)
@@ -287,6 +287,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   stripe (~> 5.22)
   turbolinks (~> 5)
   tzinfo-data
