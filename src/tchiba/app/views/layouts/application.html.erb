@@ -4,6 +4,7 @@
     <title>Tchiba</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,10 +16,13 @@
 
   <body>
 
-    <%= render "shared/navbar" %>
+    <%= render "shared/navbar", logged_in: current_user, cart_count: session[:count] %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+            <%= value %>
+      </div>
+    <% end %>
 
     <%= yield %>
     

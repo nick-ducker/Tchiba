@@ -1,72 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">
-    <img src="#" width="30" height="30" alt="">
+    IMAGE
   </a>
   <a class="navbar-brand" href="<%= root_path %>">Tchiba</a>
+  <% if current_user %>
+    <a class="navbar-brand btn btn-primary ml-auto" href="<%= cart_show_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
+  <% else %>
+    <a class="navbar-brand btn btn-primary ml-auto" href="<%= user_session_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-
+    <ul class="navbar-nav">
+  
       <li class="nav-item active">
-        <a class="nav-link " href="#">Home <span class="sr-only">(current)</span></a>
+        <%= link_to  "Browse", browse_path, class: "nav-link" %>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="nav-item active">
+        <%= link_to  "Create Blend", new_blend_path, class: "nav-link" %>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-
-    </ul>
-
-    <ul class="navbar-nav ml-auto">
-      
-        <% if current_user %>
-        <li class="nav-item active">
-          <a class="nav-link btn btn-primary" href="<%= cart_show_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
-        </li>
+      <div class="dropdown-divider"></div> 
+      <% if current_user %>
         <li class="nav-item active">
           <%= link_to "Account", account_path, class: "nav-link" %>
         </li>
         <li class="nav-item active">
+          <%= link_to  "Inbox", conversations_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item active">
           <%= link_to "Logout", destroy_user_session_path, class: "nav-link", method: "DELETE" %>
         </li>
-        <% else %>
-
-        <% end %>
-      
-    </ul>    
-
+      <% else %>
+        <li class="nav-item active">
+          <%= link_to "Login", user_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to "Sign-up", new_user_registration_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>
-
-<% if current_user %>
-  <%= link_to "Account", account_path %>
-  <%= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
-  <%= link_to  "Create Blend", new_blend_path %>
-  <%= link_to  "Cart", cart_show_path %>
-  <%= link_to  "Browse", browse_path %>
-  <%= link_to  "Inbox", conversations_path %>
-<% else %>
-  <%= link_to "Login", user_session_path %>
-  <%= link_to "Sign-up", new_user_registration_path %>
-  <%= link_to  "Create Blend", new_blend_path %>
-  <%= link_to  "Cart", user_session_path %>
-<% end %>
-
-<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
