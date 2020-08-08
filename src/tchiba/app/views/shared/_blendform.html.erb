@@ -1,0 +1,56 @@
+<div class='row align-items-center justify-content-center'>
+  <div class='col-9 col-md-6 p-5 primary d-flex flex-column align-items-center justify-content-center'>
+
+    <%= form_with model: @blend, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-row justify-content-between">
+        <div class="form-group col-3">
+          <%= f.label :price, "Price($)" %>
+          <%= f.number_field :price, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-3">
+          <%= f.label :shipping_cost, "Shipping ($)" %>
+          <%= f.number_field :shipping_cost, class: "form-control" %>
+        </div>
+        <div class="form-group col-3">
+          <%= f.label :discount_amount, "Discount ($)" %>
+          <%= f.number_field :discount_amount, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-row justify-content-between">
+        <div class="form-group col-5">
+          <%= f.label :quantity %>
+          <%= f.number_field :quantity, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-5">
+          <%= f.label :weight, "Weight (grams)" %>
+          <%= f.number_field :weight, class: "form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :descrip, "Description (be floral!)" %>
+        <%= f.text_area :descrip, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image, 'Images' %>
+        <%= f.file_field :image, multiple: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :property, 'Categories' %><br>
+        <%= f.collection_check_boxes :property_ids, Property.all, :id, :name do |c| %>
+          <div class="form-check form-check-inline badge badge-info">
+            <%= c.check_box(class: "form-check-input") %>
+            <%= c.label(class: "form-check-label") %>
+          </div>
+        <% end %>
+      </div>
+        <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
