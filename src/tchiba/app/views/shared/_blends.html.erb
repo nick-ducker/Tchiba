@@ -1,20 +1,29 @@
 <div class="row">
-  <div class="card text-white bg-dark mb-4">
-  <% if blend.image %>
-    <%= image_tag  blend.image.first, class: "card-img-top" %>
-  <% end %>
-  <div class="card-header"><%= link_to  blend.name, blend_path(blend) %>
-  <div class="card-body">
-    <h5 class="card-title"><%= number_to_currency(blend.price) %></h5>
-    <h6 class="card-subtitle mb-2 text-muted"><%= blend.weight %> grams</h6>
-    <% if blend.properties %>
-    <ul class="list-group list-group-flush">
-      <% blend.properties.each do |prop| %>
-        <li class="list-group-item"><%=prop.name%> / <%=prop.descrip%></li>
-      <% end %>
-    </ul>
+  <div class="card-columns mx-3">
+  <% @blends.each do |blend| %>
+    <div class="card text-white bg-dark mb-4">
+
+    <% unless blend.image.empty? %>
+      <%= image_tag  blend.image.first, class: "card-img-top" %>
     <% end %>
-    <%= link_to  "Blend by #{blend.user.name}", profile_path(blend.user) %>
+
+    <div class="card-header"><%= link_to  blend.name, blend_path(blend), class: "btn btn-success" %></div>
+
+      <div class="card-body">
+        <h5 class="card-title"><%= number_to_currency(blend.price) %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= blend.weight %> grams</h6>
+        
+        <% if blend.properties %>
+        <ul class="list-group list-group-flush bg-dark">
+          <% blend.properties.each do |prop| %>
+            <li class="list-group-item bg-dark"><%=prop.name%> / <%=prop.descrip%></li>
+          <% end %>
+        </ul>
+        <% end %>
+        <%= link_to "Blend by #{blend.user.name}", profile_path(blend.user) %>
+      </div>
+    </div>
+  <% end %>
   </div>
 </div>
 

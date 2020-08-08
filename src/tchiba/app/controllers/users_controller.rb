@@ -14,9 +14,8 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
 
-    @blends = @user.blends
-    pp @blends
-    @reviews = @user.reviews
+    @pagyblends, @blends = pagy(@user.blends)
+    @pagy, @reviews = pagy(@user.reviews)
   end
 
   def reviewhistory
