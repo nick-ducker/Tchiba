@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def reviewhistory
     #private
-    @reviews = current_user.reviews
+    @pagy, @reviews = pagy(current_user.reviews)
   end
 
   def ordertransactionhistory
