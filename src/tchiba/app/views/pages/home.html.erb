@@ -15,25 +15,9 @@
   </div>
   
   <div class="container">
-    <div class="row primary mt-3">
-      <div class="col">
-        <%= form_with scope: :browse, url: browse_path, local: true, class: "p-4" do |f| %>
-          <div class="form-group">
-            <%= f.label :search %>
-            <%= f.text_field :search, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :tea_ids, 'Tea Type' %>
-            <%= f.collection_select :tea_ids, Property.where("id < ?", 11), :id, :name, {}, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :flavour_ids, 'Flavour' %>
-            <%= f.collection_select :flavour_ids, Property.where("id > ?", 10), :id, :name, {}, class: "form-control" %>
-          </div>
-          <%= f.submit "Search", class: "btn btn-primary"%>
-          <% end %>
-      </div>
-    </div>
+    
+    <%= render  "shared/searchbar" %>
+
     <div class="row my-3 px-5 py-3 secondary flex-column align-items-center justify-content-center">
       <div class="row">
         <h3><em>Find some inspiration</em><h3>
