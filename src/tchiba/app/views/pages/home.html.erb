@@ -1,25 +1,44 @@
-<h1>Home Page</h1>
 
-<% if current_user %>
-  <%= link_to "Account", account_path %>
-  <%= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
-  <%= link_to  "Create Blend", new_blend_path %>
-  <%= link_to  "Cart", cart_show_path %>
-  <%= link_to  "Browse", browse_path %>
-  <%= link_to  "Inbox", conversations_path %>
-<% else %>
-  <%= link_to "Login", user_session_path %>
-  <%= link_to "Sign-up", new_user_registration_path %>
-  <%= link_to  "Create Blend", new_blend_path %>
-  <%= link_to  "Cart", user_session_path %>
-<% end %>
+  
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag  "one.jpg", class: "d-block w-100" %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag  "two.jpg", class: "d-block w-100" %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag  "three.jpg", class: "d-block w-100" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row primary mt-3">
+      <div class="col">
+        <%= form_with scope: :browse, url: browse_path, local: true, class: "p-4" do |f| %>
+          <div class="form-group">
+            <%= f.label :search %>
+            <%= f.text_field :search, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :tea_ids, 'Tea Type' %>
+            <%= f.collection_select :tea_ids, Property.where("id < ?", 11), :id, :name, {}, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :flavour_ids, 'Flavour' %>
+            <%= f.collection_select :flavour_ids, Property.where("id > ?", 10), :id, :name, {}, class: "form-control" %>
+          </div>
+          <%= f.submit "Search", class: "btn btn-primary"%>
+          <% end %>
+      </div>
+    </div>
+    <div class="row my-3 px-5 py-3 secondary flex-column align-items-center justify-content-center">
+      <div class="row">
+        <h3><em>Find some inspiration</em><h3>
+      </div>
+      <%= render  "shared/blends", collection: @pagy %>
+    </div>
+  </div>
 
-<%= form_with scope: :browse, url: browse_path, local: true do |f| %>
-<%= f.label :search %>
-<%= f.text_field :search %><br>
-<%= f.label :tea_ids, 'Tea Type' %>
-<%= f.collection_select :tea_ids, Property.where("id < ?", 11), :id, :name %><br>
-<%= f.label :flavour_ids, 'Flavour' %>
-<%= f.collection_select :flavour_ids, Property.where("id > ?", 10), :id, :name %><br>
-<%= f.submit "Search"%>
-<% end %>

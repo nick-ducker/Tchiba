@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :check_for_cart, only: [:home] 
 
   def home
+    @pagy, @blends = pagy(Blend.limit(6))
   end
 
   def contact
