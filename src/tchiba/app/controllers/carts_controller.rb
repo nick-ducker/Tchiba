@@ -5,9 +5,9 @@ class CartsController < ApplicationController
 
   def show
     @cartitems = current_user.cart.cart_items
-    n = 0
-    @cartitems.each{|x| x.order ? n += 1 : nil}
-    n == @cartitems.size ? (@notable = true) : (@notable = false)
+    # n = 0
+    # @cartitems.each{|x| x.order ? n += 1 : nil}
+    # n == @cartitems.size ? (@notable = true) : (@notable = false)
   end
 
   def update_quantity
@@ -17,15 +17,24 @@ class CartsController < ApplicationController
   end
 
   def remove_item
+    if @cartitem.order
+      flash[:alert] = "You must cancel your order before you can remove this item from your cart"
+      redirect_to order_path(@cartitem.order) and return
+    end
     @cartitem.destroy
     flash[:alert] = "Blend removed from cart"
     redirect_back(fallback_location: root_path)
   end
 
   def add_item
-    current_user.cart.cart_items.create(strong_cart_params)
-    flash[:alert] = "Blend added to cart"
-    redirect_back(fallback_location: root_path)
+    if current_user.cart.cart_items.find_by(blend_id: strong_cart_params[:blend_id])
+      flash[:alert] = "You already have this item in your cart"
+      redirect_back(fallback_location: root_path)
+    else
+      current_user.cart.cart_items.create(strong_cart_params)
+      flash[:alert] = "Blend added to cart"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
 private

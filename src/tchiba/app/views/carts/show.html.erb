@@ -1,42 +1,56 @@
-<h1>Your Cart</h1>
-<% if @cartitems.empty? || @notable %>
-  <p>You have nothing in your cart!</p>
-<% else %>
-  <table>
-    <tr>
-      <th>Blend Name</th>
-      <th>Quantity</th>
-      <th>Gross Price</th>
-      <th>Discount</th>
-      <th>Shipping Cost</th>
-      <th>Final Total</th>
-      <th>Checkout?</th>
-      <th>Remove?</th>
-    </tr>
-    <% @cartitems.each do |item| %>
-      <% if item.order %>
-        <%= nil %>
-      <% else %>
-        <tr>
-          <th><%= link_to  item.blend.name, blend_path(item.blend) %></th>
-          <th>
-            <%= form_with model: item, url: cart_update_path(item), local: true do |f|%>
-              <%= f.number_field :blend_quantity, min: 1 %>
-              <%= f.submit 'Update' %>
-            <% end %>
-          </th>
-          <th><%= item.gross_price %></th>
-          <th><%= item.total_discount %></th>
-          <th><%= item.blend.shipping_cost %></th>
-          <th><%= item.total_amount %></th>
-          <th><%= link_to  "Checkout this item?", orders_path(id: item.id), method: "POST" %></th>
-          <th><%= link_to  "X", cart_remove_path(item), method: "POST",
-                                                        data: { confirm: 'Are you sure?' } %>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
-<% end %>
+<div class="spacer"></div>
+<div class="container">
 
-<%= link_to  "Your Orders", order_history_path, class: 'btn btn-primary' %>
+  <div class="col primary">
+    <div class="row pt-5 px-5">
+      <h3>Your Cart</h3>
+    </div>
+    <hr>
+    <% if @cartitems.empty? || @notable %>
+    <div class="row p-5">
+      <p>You have nothing in your cart!</p>
+    </div>
+    <% else %>
+    <div class="row px-5">
+      <table class="table table-striped table-dark table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">Blend Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Checkout?</th>
+            <th scope="col">Remove?</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cartitems.each do |item| %>
+          <tr>
+            <th><%= link_to  item.blend.name, blend_path(item.blend) %></th>
+            
+            <%= form_with model: item, url: cart_update_path(item), local: true do |f|%>
+            <th class="form-group col-lg-1">                
+              <%= f.number_field :blend_quantity, min: 1, max: item.blend.quantity, class: "form-control" %>                
+              <%= f.submit 'Update', class: "btn btn-primary btn-sm" %>             
+            </th>
+            <% end %>
+            
+            <th><%= item.total_amount %></th>
+            <% if item.order %>
+              <th><%= link_to  "Order Link", order_path(item.order)%></th>
+            <% else %>
+              <th><%= link_to  "Checkout this item?", orders_path(id: item.id), method: "POST" %></th>
+            <% end %>            
+            <th><%= link_to  "X", cart_remove_path(item), method: "POST",
+                                                          data: { confirm: 'Are you sure?' } %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
+    
+    
+  </div>
+</div>
+
 
