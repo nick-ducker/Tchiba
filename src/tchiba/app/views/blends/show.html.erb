@@ -1,6 +1,6 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <% unless @blend.image %>
+    <% if @blend.image.count == 0 %>
       <div class="carousel-item active">
         <%= image_tag  "one.jpg", class: "d-block w-100" %>
       </div>
@@ -42,11 +42,14 @@
       <% else %>
         <%= form_with model: @cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
           <%= f.hidden_field :blend_id, value: @blend.id %>
-          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1 %>
-          <%= f.submit "Add to Cart" %>
+          <div class="form-group">
+          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
+          </div>
+          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
         <% end %>
-        <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
-        <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id) %>
+        <hr>
+        <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id), class: "btn btn-warning" %>
+        <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id), class: "btn btn-info" %>
       <% end %>
       <% else %>
         <%= form_with model: @cart_item, url: user_session_path, method: "GET", local: true do |f| %>
@@ -57,21 +60,23 @@
         <% end %>
         <hr>
         <%= link_to  "Leave a review", user_session_path, class: "btn btn-warning" %>
-        <%= link_to  "Ask a question", user_session_path, class: "btn btn-info"  %>
+        <%= link_to  "Ask a question", user_session_path, class: "btn btn-info" %>
     <% end %>
     </div>
   </div>
 
   <div class="row">
+    <div class= "col-4 secondary m-3 p-4">
+    <h3><strong>Rating</strong>: <em><%= @blend.totalrating %> / 5</em></h3>
+    <hr>
     <% if @blend.properties %>
-      <div class= "col-4 secondary m-3 p-4">
-        <ul class="list-group">
-          <% @blend.properties.each do |prop| %>
-            <li class="list-group-item list-group-item-dark"><strong><%= prop.name %></strong>, <em><%= prop.descrip %></em></li>
-          <% end %>
-        </ul>
-      </div>
+      <ul class="list-group">
+        <% @blend.properties.each do |prop| %>
+          <li class="list-group-item list-group-item-dark"><strong><%= prop.name %></strong>, <em><%= prop.descrip %></em></li>
+        <% end %>
+      </ul>
     <% end %>
+    </div>
     <div class="col secondary m-3 p-4">
       <h3><strong>Description</strong></h3>
       <hr>
