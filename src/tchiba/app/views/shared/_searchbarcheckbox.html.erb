@@ -1,0 +1,30 @@
+<div class="row primary mt-3">
+      <div class="col">
+        <%= form_with scope: :browse, url: browse_path, local: true, class: "p-4" do |f| %>
+          <div class="form-group">
+            <%= f.label :search %>
+            <%= f.text_field :search, class: "form-control" %>
+          </div>
+          <hr>
+          <div class="form-group">
+            <%= f.collection_check_boxes :tea_ids, Property.where("id < ?", 11), :id, :name do |c| %>
+              <div class="form-check form-check-inline badge badge-info">
+              <%= c.check_box(class: "form-check-input") %>
+              <%= c.label(class: "form-check-label") %>
+              </div>
+            <% end %>
+          </div>
+          <hr>
+          <div class="form-group">
+            <%= f.collection_check_boxes :flavour_ids, Property.where("id > ?", 10), :id, :name do |c| %>
+              <div class="form-check form-check-inline badge badge-success">
+              <%= c.check_box(class: "form-check-input") %>
+              <%= c.label(class: "form-check-label") %>
+              </div>
+            <% end %>
+          </div>
+          <hr>
+          <%= f.submit "Search", class: "btn btn-primary"%>
+          <% end %>
+      </div>
+    </div>
