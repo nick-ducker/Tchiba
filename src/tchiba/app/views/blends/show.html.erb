@@ -1,49 +1,89 @@
-<h1><%= @blend.name %></h1>
-<h2>Blend by <%= link_to  @blend.user.name, profile_path(@blend.user) %></h2>
-
-<% if @blend.image.attached? %>
-  <% @blend.image.each do |image| %>
-    <%=  image_tag image %>
-  <% end %>
-<% end %>
-<p> <%= @blend.totalrating %> </p>
-<p> <%= @blend.price %> </p>
-<p> <%= @blend.weight %>g </p>
-<p> <%= @blend.shipping_cost %> </p>
-<p> <%= @blend.discount_amount %> </p>
-<p> <%= @blend.descrip %> </p>
-<p> <%= @blend.price %> </p>
-<% @blend.properties.each do |property| %>
-  <%= property.name %>
-  <%= property.descrip %><br>
-<% end %>
-
-<% if current_user.id == @blend.user.id %>
-  <h3>Administration controls</h3>
-  Quantity left: <%= @blend.quantity %>
-  <%= link_to  "Edit", edit_blend_path(@blend) %>
-  <%= link_to  "Delete", blend_path(@blend), 
-                        method: 'DELETE',
-                        data: { confirm: 'Are you sure?' } %>
-<% else %>
-  <%= form_with model: @cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
-    <%= f.hidden_field :blend_id, value: @blend.id %>
-    <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1 %>
-    <%= f.submit "Add to Cart" %>
-  <% end %>
-  <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
-  <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id) %>
-<% end %>
-
-<% if @blend.reviews %>
-  <% @blend.reviews.each do |review| %>
-    <%= review.user.name %><br>
-    <%= review.rating %><br>
-    <%= review.descrip %><br>
-    <%= link_to "Full Review", review_path(review) %><br>
-    <% if review.user.id == current_user.id %>
-      <%= link_to  "Delete Review", review_path(review), method: "DELETE",
-                                                        data: { confirm: 'Are you sure?' } %>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <% unless @blend.image %>
+      <div class="carousel-item active">
+        <%= image_tag  "one.jpg", class: "d-block w-100" %>
+      </div>
+    <% else %>
+      <div class="carousel-item active">
+        <%= image_tag  @blend.image.first, class: "d-block w-100" %>
+      </div>
     <% end %>
+
+    <% if @blend.image.count > 1 %>
+      <% @blend.image[1..-1].each do |img| %>
+        <div class="carousel-item">
+          <%= image_tag  img, class: "d-block w-100" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col primary m-3 p-3">
+      <h3>Blend name: <strong><%= @blend.name %></strong></h3>
+      <hr>
+      <h3>Blender: <strong><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary" %></strong></h3>
+      <hr>
+      <h3>Price: <strong><%= number_to_currency(@blend.price) %></strong></h3>
+    </div>
+    <div class= "col primary m-3 p-4">
+    <% if current_user %>
+      <% if current_user.id == @blend.user.id %>
+        <h3>Administration controls</h3>
+        <hr>
+        <h4>Quantity left: <strong><%= @blend.quantity %></strong></h4>
+        <%= link_to  "Edit", edit_blend_path(@blend), class: "btn btn-warning" %>
+        <%= link_to  "Delete", blend_path(@blend), class: "btn btn-danger",
+                                                  method: 'DELETE',
+                                                  data: { confirm: 'Are you sure?' } %>
+      <% else %>
+        <%= form_with model: @cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
+          <%= f.hidden_field :blend_id, value: @blend.id %>
+          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1 %>
+          <%= f.submit "Add to Cart" %>
+        <% end %>
+        <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id) %>
+        <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id) %>
+      <% end %>
+      <% else %>
+        <%= form_with model: @cart_item, url: user_session_path, method: "GET", local: true do |f| %>
+          <div class="form-group">
+          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
+          </div>
+          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+        <% end %>
+        <hr>
+        <%= link_to  "Leave a review", user_session_path, class: "btn btn-warning" %>
+        <%= link_to  "Ask a question", user_session_path, class: "btn btn-info"  %>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if @blend.properties %>
+      <div class= "col-4 secondary m-3 p-4">
+        <ul class="list-group">
+          <% @blend.properties.each do |prop| %>
+            <li class="list-group-item list-group-item-dark"><strong><%= prop.name %></strong>, <em><%= prop.descrip %></em></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="col secondary m-3 p-4">
+      <h3><strong>Description</strong></h3>
+      <hr>
+      <p><%= @blend.descrip %></p>
+    </div>
+  </div>
+  <hr>
+  <% unless @blend.reviews.empty? %>
+  <%= render  "shared/reviews", collection: @pagy %>
+  <% else %>
+  <div class="row justify-content-center m-5">
+    <h3><strong>This product has no reviews yet!</strong></h3>
+  </div>
   <% end %>
-<% end %>
+</div>

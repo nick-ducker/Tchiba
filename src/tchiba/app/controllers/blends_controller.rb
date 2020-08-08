@@ -21,6 +21,7 @@ class BlendsController < ApplicationController
 
   def show
     @blend = Blend.find(params[:id])
+    @pagy, @reviews = pagy(@blend.reviews)
     @cart_item = CartItem.new
   end
 
