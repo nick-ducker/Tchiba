@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
   before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy]
   before_action :cart_count, only: [:show]
+  before_action :set_order, only: [:show, :update, :destroy]
+  
   def create
     unless current_user.address 
       flash[:alert] = "You need to register an address before you can checkout"
@@ -20,8 +22,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-
     @paid = @order.paid
 
     # STRIPE PAYMENT SETUP
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
     order_id = payment.metadata.order_id
     cart_item_id = payment.metadata.cart_item_id
 
-    @order = Order.find(order_id)
+    order = Order.find(order_id)
 
     trans = Transaction.new(
       order_id: order_id,
@@ -89,18 +89,16 @@ class OrdersController < ApplicationController
 
     trans.save
 
-    if @order.transactions
-      @transactions = @order.transactions
-      x = 0
-      @transactions.each do |trans|
-        if trans.paid
-          x += trans.amount
-        end
+    transactions = @order.transactions
+    x = 0
+    transactions.each do |trans|
+      if trans.paid
+        x += trans.amount
       end
-       x >= @order.total ? (@paid = true) : (@paid = false)
     end
+    x >= order.total ? (paid = true) : (paid = false)
 
-    if @paid && @order.paid == false
+    if paid && @order.paid == false
       @order.update(paid: true)
       @order.cart_item.blend.update(quantity: (@order.cart_item.blend.quantity - @order.cart_item.blend_quantity))
       Order.update(cart_item_id: nil)
@@ -111,15 +109,21 @@ class OrdersController < ApplicationController
   end
 
   def update
-    order = Order.find(params[:id])
-    order.update(shipped: true)
-    redirect_to order_path(order)
+    
+    @order.update(shipped: true)
+    redirect_to order_path(@order)
   end
 
   def destroy
-    order = Order.find(params[:id])
-    order.destroy
+    @order.destroy
     flash[:alert] = "Order Cancelled"
     redirect_to cart_show_path
   end
+
+private
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
 end
