@@ -1,12 +1,18 @@
-<h1>Users#reviewhistory</h1>
+<div class='container height'>
+  <div class='spacer'></div>
+  <div class='row height align-items-center justify-content-center'>
+    <div class='col my-3 primary d-flex flex-column align-items-center justify-content-center'>
+      <div class='row'>
+        <h3>Your Reviews</h3>
+      </div>
 
-<% if @reviews.empty? %>
-  <p> You haven't created any reviews yet</p>
-<% else %>
-  <% @reviews.each do |review| %>
-    <%= review.blend.name %>
-    <%= review.rating %>
-    <%= review.descrip %>
-    <%= review.created_at %>
-  <% end %>
-<% end %>
+      <% if @reviews.empty? %>
+        <div class='row'>
+          <h5> You haven't created any reviews yet</h5>
+        </div>
+      <% else %>
+        <%= render 'shared/reviews', collection: @reviews %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="card-columns mx-3">
+    <% @reviews.each do |review| %>
+    <div class="card text-white bg-dark mb-4">
+      <div class="card-header"><%= review.rating.to_i %> / 5</div>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted"><%= link_to  review.blend.name, blend_path(review.blend) %></h6>
+        <p class="card-text"><%= review.descrip %></p>
+        <%= link_to  review.user.name, profile_path(review.user), class: "card_link" %>
+        <p class="card-text"><small class="text-muted"><%= review.created_at %></small></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
