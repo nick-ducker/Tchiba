@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
-  before_action :authenticate, only: [:show, :reviewhistory, :ordertransactionhistory]
+  before_action :authenticate, only: [:show, :reviewhistory, :ordertransactionhistory, :calculate_credit]
 
   def show
     #private
     @user = current_user
+  end
+
+  def calculate_credit
+    user = current_user
+    user.update(credit: user.calculate_credit)
+    redirect_to account_path
   end
 
   def profile

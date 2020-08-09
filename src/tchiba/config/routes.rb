@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'users/reviews', to: 'users#reviewhistory', as: 'review_history'
   get 'users/orders', to: 'users#ordertransactionhistory', as: 'order_history'
   get 'users/profile/:id', to: 'users#profile', as: 'profile'
+  get '/credit', to: 'users#calculate_credit', as: 'credit'
 
   #BLEND ROUTING
   resources :blends do

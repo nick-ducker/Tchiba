@@ -16,5 +16,21 @@ class User < ApplicationRecord
   has_many :seller_orders, foreign_key: "seller_id", class_name: "Order"
 
   validates_presence_of :credit, :name
-  
+
+  def calculate_credit
+    credit = 0.0
+    if self.seller_orders
+      self.seller_orders.each do |order|
+        if order.paid
+          order.transactions.each do |trans|
+            if trans.paid
+              credit += trans.amount  
+            end
+          end
+        end
+      end 
+    end
+    return credit.round(2) 
+  end
+
 end

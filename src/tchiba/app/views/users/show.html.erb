@@ -21,7 +21,7 @@
           <% address = @user.address %>
           <p><strong>Address:</strong> <%= address.number %> <%= address.street %>, <%= address.suburb %>, <%= address.state %> <%= address.postcode %></p>
         <% end %>
-        <p><strong>Credit:</strong> <%= @user.credit %></p>
+        <p><strong>Credit:</strong> <%= @user.credit %> // <%= link_to  "Calculate Credit", credit_path, class: "btn btn-primary" %></p>
       </div>
       <hr/>
       <div class='row flex-column m-2'>
