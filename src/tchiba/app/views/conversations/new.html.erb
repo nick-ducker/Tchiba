@@ -1,8 +1,18 @@
-<h1>Ask a question</h1>
+<div class="spacer"></div>
+<div class="container">
+  <div class="col primary">
 
-<%= form_with model: @message, url: conversation_path(@conversation), local: true do |f| %>
-  <%= f.hidden_field :conversation_id, value: @conversation.id %>
-  <p>Ask a question about <%= @blend.name %></p>
-  <%= f.text_area :content %>
-  <%= f.submit %>
-<% end %>
+    <div class="row pl-5 pt-5">
+      <h3>Ask a question about <%= @blend.name %></h3>
+    </div>
+    <div class="row pl-5">
+      <%= form_with model: @message, url: conversation_path(@conversation), local: true do |f| %>
+        <%= f.hidden_field :conversation_id, value: @conversation.id %>
+        <div class="form-group">
+        <%= f.text_area :content, class: "form-control" %>
+        <%= f.submit "Send Message", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

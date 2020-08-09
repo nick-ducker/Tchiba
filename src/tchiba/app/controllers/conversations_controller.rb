@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
     @blend = Blend.find(params[:blend_id])
 
     if Conversation.find_by(blend_id: @blend.id, from_user_id: current_user.id)
-      redirect_to conversation_path(Conversation.find_by(blend_id: @blend.id, from_user_id: current_user.id))
+      redirect_to conversation_path(Conversation.find_by(blend_id: @blend.id, from_user_id: current_user.id)) and return
     end
     
     @conversation = Conversation.create(to_user_id: @blend.user.id, from_user_id: current_user.id, blend_id: @blend.id)
