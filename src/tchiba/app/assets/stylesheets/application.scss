@@ -65,3 +65,14 @@ body {
 .carousel-item {
   transform: translateY(-30%);
 }
+
+//alert
+
+.alert {
+  position: fixed;
+  width: 80%;
+  bottom: 0;
+  margin-left: 10%;
+  margin-left: 10%;
+  z-index: 1070;
+}
