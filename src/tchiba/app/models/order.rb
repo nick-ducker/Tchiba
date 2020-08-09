@@ -9,6 +9,8 @@ class Order < ApplicationRecord
 
   has_many :transactions
 
+  belongs_to :blend
+
   validates_presence_of :gross, :total
   validates_numericality_of :gross, :total
 

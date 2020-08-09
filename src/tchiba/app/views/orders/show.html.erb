@@ -1,6 +1,136 @@
-<h1>Order no. <%= @order.id %></h1>
+<div class="spacer"></div>
+<div class="container d-flex justify-content-center">
+  <div class="col-md-6 primary d-flex flex-column align-items-center">
+    <div class="row pt-5 px-5">
+      <h1>Order no. <%= @order.id %></h1>
+    </div>
+    <div class="row px-5">
+      <h4>Paid status: <%= @order.paid ? "Paid"  : "Not Paid" %></h4>
+    </div>
+    <div class="row px-5">
+      <h4>Shipped status: <%= @order.shipped ? "Shipped"  : "Not shipped" %></h4><br>
+      <% if @order.seller_id == current_user.id && @order.shipped == false %>
+      <%= link_to  "Change Status to Shipped", order_path(@order), method: "PATCH",
+                                                              data: {confirm: "Are you sure? You won't be able to undo this."} %>
+      <% end %>
+    </div>
+    <div class="row pt-5 px-5">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><%= link_to @order.blend.name, blend_path(@order.blend) %></th>
+            <th><%= @order.blend.weight %>g</th>
+            <% if @order.cart_item %>
+            <th><%= @order.cart_item.blend_quantity %></th>
+            <% else %>
+            <th>Items ordered!</th>
+            <% end %>
+            <th><%= number_to_currency(@order.blend.price) %></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th><em>Gross:</em></th>
+            <th><%= number_to_currency(@order.gross) %></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th><em>Discount:</em></th>
+            <th>-<%= number_to_currency(@order.blend.discount_amount) %></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th><em>Shipping:</em></th>
+            <th><%= number_to_currency(@order.blend.shipping_cost) %></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th><em>Total:</em></th>
+            <th><%= number_to_currency(@order.total) %></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <% unless @paid || @order.seller_id == current_user.id %>
+      <div class="row justify-content-between pb-5 w-50">
 
-<% unless @paid || @order.seller_id == current_user.id %>
+      <button data-stripe="payment", class="btn btn-primary">
+        Pay <%= number_to_currency(@order.total) %>
+      </button>
+
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        document
+          .querySelector("[data-stripe='payment']")
+          .addEventListener("click", () => {
+            const stripe = Stripe(
+              "<%= ENV['PUBLISHABLE_KEY'] %>"
+            );
+
+            stripe.redirectToCheckout({
+              sessionId: "<%= @session_id %>"
+            });
+          });
+      </script>
+
+      <%= link_to  "Cancel Order", order_path(@order), method: "DELETE",
+                                                      class: "btn btn-danger",
+                                                      data: {confirm: "Are you sure?"} %>
+      </div>                                              
+    <% end %>
+
+    <% if @paid %>
+    <div class="row px-5">
+      <h2>This Order has been paid for!</h2>
+    </div>
+    <% elsif @paid == false && @order.seller_id == current_user.id %>
+    <div class="row px-5">
+      <h2>This Order is awaiting payment from the buyer</h2>
+    </div>
+    <% end %>
+    <% if @transactions %>
+      <div class="row px-5">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Paid?</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <% @transactions.each do |transact| %>
+            <tr>
+              <td><%= transact.updated_at %></td>
+              <td><%= number_to_currency(transact.amount) %></td>
+              <td><%= transact.paid ? "Payment Successful" : "Payment Failed" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<%
+=begin%>
+ <% unless @paid || @order.seller_id == current_user.id %>
   <button data-stripe="payment">
   Pay <%= number_to_currency(@order.total) %>
 </button>
@@ -22,7 +152,8 @@
 </script>
 
 <%= link_to  "Cancel Order", order_path(@order), method: "DELETE",
-                                                data: {confirm: "Are you sure?"} %>                                              
+                                                data: {confirm: "Are you sure?"} %>
+                                              
 <% end %>
 
 <% if @paid %>
@@ -31,15 +162,7 @@
   <h2>This Order is awaiting payment from the buyer</h2>
 <% end %>
 
-<% if @order.seller_id == current_user.id && @order.shipped == false %>
-  <%= link_to  "Change Status to Shipped", order_path(@order), method: "PATCH",
-                                                              data: {confirm: "Are you sure? You won't be able to undo this."} %>
-<% end %>
+<hr> 
+<%
+=end%>
 
-<% if @transactions %>
-  <% @transactions.each do |transact| %>
-    <%= transact.updated_at %><br>
-    <%= number_to_currency(transact.amount) %><br>
-    <%= transact.paid %><br>
-  <% end %>
-<% end %>

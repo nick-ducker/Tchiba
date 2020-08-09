@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
 
     @cartitem = CartItem.find(params[:id])
     @cartitem.create_order(
+      blend_id: @cartitem.blend.id,
       buyer_id: current_user.id,
       seller_id: @cartitem.blend.user.id,
       gross: @cartitem.gross_price,
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
 
   def show
     @paid = @order.paid
-
+    @transactions = @order.transactions
     # STRIPE PAYMENT SETUP
     unless @paid
       session = Stripe::Checkout::Session.create(
@@ -81,26 +82,26 @@ class OrdersController < ApplicationController
 
     order = Order.find(order_id)
 
-    trans = Transaction.new(
+    hooktrans = Transaction.new(
       order_id: order_id,
       amount: amount / 100,
       paid: true
     )
 
-    trans.save
+    hooktrans.save
 
-    transactions = @order.transactions
+    transactions = order.transactions
     x = 0
     transactions.each do |trans|
       if trans.paid
         x += trans.amount
       end
     end
-    x >= order.total ? (paid = true) : (paid = false)
+    x >= order.total ? (@paid = true) : (@paid = false)
 
-    if paid && @order.paid == false
-      @order.update(paid: true)
-      @order.cart_item.blend.update(quantity: (@order.cart_item.blend.quantity - @order.cart_item.blend_quantity))
+    if @paid && order.paid == false
+      order.update(paid: true)
+      order.blend.update(quantity: (order.blend.quantity - order.blend.quantity))
       Order.update(cart_item_id: nil)
       CartItem.find(cart_item_id).destroy
     end

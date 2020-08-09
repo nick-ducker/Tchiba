@@ -23,18 +23,18 @@
 <div class="container">
   <div class="row">
     <div class="col primary m-3 p-3">
-      <h3>Blend name: <strong><%= @blend.name %></strong></h3>
+      <h5>Blend name: <strong><%= @blend.name %></strong></h5>
       <hr>
-      <h3>Blender: <strong><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary" %></strong></h3>
+      <h5>Blender: <strong><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary" %></strong></h5>
       <hr>
-      <h3>Price: <strong><%= number_to_currency(@blend.price) %></strong></h3>
+      <h5>Price: <strong><%= number_to_currency(@blend.price) %></strong></h5>
     </div>
     <div class= "col primary m-3 p-4">
     <% if current_user %>
       <% if current_user.id == @blend.user.id %>
-        <h3>Administration controls</h3>
+        <h5>Administration controls</h5>
         <hr>
-        <h4>Quantity left: <strong><%= @blend.quantity %></strong></h4>
+        <h6>Quantity left: <strong><%= @blend.quantity %></strong></h6>
         <%= link_to  "Edit", edit_blend_path(@blend), class: "btn btn-warning" %>
         <%= link_to  "Delete", blend_path(@blend), class: "btn btn-danger",
                                                   method: 'DELETE',
@@ -67,7 +67,7 @@
 
   <div class="row">
     <div class= "col-4 secondary m-3 p-4">
-    <h3><strong>Rating</strong>: <em><%= @blend.totalrating %> / 5</em></h3>
+    <h5><strong>Rating</strong>: <em><%= @blend.totalrating %> / 5</em></h5>
     <hr>
     <% if @blend.properties %>
       <ul class="list-group">
@@ -78,7 +78,7 @@
     <% end %>
     </div>
     <div class="col secondary m-3 p-4">
-      <h3><strong>Description</strong></h3>
+      <h5><strong>Description</strong></h5>
       <hr>
       <p><%= @blend.descrip %></p>
     </div>
@@ -88,7 +88,7 @@
   <%= render  "shared/reviews", collection: @pagy %>
   <% else %>
   <div class="row justify-content-center m-5">
-    <h3><strong>This product has no reviews yet!</strong></h3>
+    <h5><strong>This product has no reviews yet!</strong></h5>
   </div>
   <% end %>
 </div>

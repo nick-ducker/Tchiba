@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_062623) do
+ActiveRecord::Schema.define(version: 2020_08_09_004927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 2020_08_07_062623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "cart_item_id"
+    t.bigint "blend_id", null: false
+    t.index ["blend_id"], name: "index_orders_on_blend_id"
     t.index ["buyer_id"], name: "index_orders_on_buyer_id"
     t.index ["cart_item_id"], name: "index_orders_on_cart_item_id"
     t.index ["seller_id"], name: "index_orders_on_seller_id"
@@ -178,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_062623) do
   add_foreign_key "conversations", "users", column: "from_user_id"
   add_foreign_key "conversations", "users", column: "to_user_id"
   add_foreign_key "messages", "conversations"
+  add_foreign_key "orders", "blends"
   add_foreign_key "orders", "cart_items"
   add_foreign_key "orders", "users", column: "buyer_id"
   add_foreign_key "orders", "users", column: "seller_id"
