@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get '/', to: 'pages#home'
   get '/home', to: 'pages#home'
 
-  get '/contact', to: 'pages#contact'
-  get '/admindash', to: 'pages#admindashboard'
+  get '/contact', to: 'pages#contact', as: 'contact'
+  #get '/admindash', to: 'pages#admindashboard'
 
   get '/browse', to: 'pages#browse', as: 'browse'
   post '/browse', to: 'pages#search'

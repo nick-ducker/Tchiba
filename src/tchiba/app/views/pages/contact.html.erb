@@ -1,1 +1,25 @@
-<h1>Contact Page</h1>
+<div class="spacer"></div>
+<div class="container d-flex justify-content-center">
+  <div class="col-md-6 primary d-flex flex-column align-items-center">
+    <div class="row pt-5 px-5">
+      <h3>Get in touch</h3>
+    </div>
+    <hr>
+    <div class='row align-items-center justify-content-center'>
+    <%= link_to 'https://github.com/nick-ducker', class: "col-4 m-1" do %>
+      <%= image_tag  "giticon.png", class: 'img-fluid' %>
+    <% end %>
+    <%= link_to  'https://www.linkedin.com/in/nickducker/', class: "col-4 m-1" do %>
+      <%= image_tag  "linkedinicon.png", class: 'img-fluid' %>
+    <% end %>
+    <%= link_to 'mailto:animaginaryperson@tchiba.com', class: "col-4 m-1" do %>
+      <%= image_tag  "mailicon.png", class: 'img-fluid' %>
+    <% end %>
+    <%= link_to 'https://twitter.com/DriftingDev', class: "col-4 m-1" do %>
+      <%= image_tag  "twittericon.png", class: 'img-fluid' %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+
