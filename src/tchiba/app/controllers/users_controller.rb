@@ -20,14 +20,14 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
     #loads blends attached to a particular user
-    @pagyblends, @blends = pagy(@user.blends)
+    @pagyblends, @blends = pagy(@user.blends, items: 6)
     #loads reviews attached to a particular user
-    @pagy, @reviews = pagy(@user.reviews)
+    @pagy, @reviews = pagy(@user.reviews, items: 8)
   end
 
   def reviewhistory
     #loads reviews attached to the current user
-    @pagy, @reviews = pagy(current_user.reviews)
+    @pagy, @reviews = pagy(current_user.reviews, items: 10)
   end
 
   def ordertransactionhistory
