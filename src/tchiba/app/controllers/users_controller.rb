@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate, only: [:show, :reviewhistory, :ordertransactionhistory, :calculate_credit]
-
+  before_action :current_user_set, only: [:show, :calculate_credit]
+  
   def show
-    #private
-    @user = current_user
   end
 
   def calculate_credit
-    user = current_user
-    user.update(credit: user.calculate_credit)
+    @user.update(credit: @user.calculate_credit)
     redirect_to account_path
   end
 
@@ -25,12 +23,10 @@ class UsersController < ApplicationController
   end
 
   def reviewhistory
-    #private
     @pagy, @reviews = pagy(current_user.reviews)
   end
 
   def ordertransactionhistory
-
     @buyerorders = current_user.buyer_orders
     @sellerorders = current_user.seller_orders
 
@@ -47,8 +43,11 @@ class UsersController < ApplicationController
         @sellertransactions << transact
       end
     end
-
   end
 
   private
+
+  def current_user_set
+    @user = current_user
+  end
 end
