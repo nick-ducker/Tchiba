@@ -6,6 +6,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Property creation
+Property.create(name: "Black" , descrip: "Tea Type")
+Property.create(name: "Green" , descrip: "Tea Type")
+Property.create(name: "Oolong" , descrip: "Tea Type")
+Property.create(name: "Pu'erh" , descrip: "Tea Type")
+Property.create(name: "White" , descrip: "Tea Type")
+Property.create(name: "Herbal" , descrip: "Tea Type")
+Property.create(name: "Oolong" , descrip: "Tea Type")
+Property.create(name: "Matcha" , descrip: "Tea Type")
+Property.create(name: "Chai" , descrip: "Tea Type")
+Property.create(name: "Herbal" , descrip: "Tea Type")
+Property.create(name: "Berry" , descrip: "Flavour")
+Property.create(name: "Chocolate" , descrip: "Flavour")
+Property.create(name: "Cinnamon" , descrip: "Flavour")
+Property.create(name: "Citrus" , descrip: "Flavour")
+Property.create(name: "Coconut" , descrip: "Flavour")
+Property.create(name: "Floral" , descrip: "Flavour")
+Property.create(name: "Fruity" , descrip: "Flavour")
+Property.create(name: "Ginger" , descrip: "Flavour")
+Property.create(name: "Grassy" , descrip: "Flavour")
+Property.create(name: "Malty" , descrip: "Flavour")
+Property.create(name: "Mint" , descrip: "Flavour")
+Property.create(name: "Nutty" , descrip: "Flavour")
+Property.create(name: "Spicy" , descrip: "Flavour")
+Property.create(name: "Sweet" , descrip: "Flavour")
+Property.create(name: "Vanilla" , descrip: "Flavour")
+
 n = 1
 user_id = n
 
@@ -30,7 +57,6 @@ n = 1
   postcode = n + 5000
   user = User.find(n)
   user.create_address(number: number, street: street, suburb: suburb, state: state, postcode: postcode)
-  #user.create_cart
   n += 1
 end
 
@@ -75,28 +101,3 @@ end
 #   order.transactions.create(amount: order.total, paid:true)
 # end
 
-# Property.create(name: "Black" , descrip: "Tea Type")
-# Property.create(name: "Green" , descrip: "Tea Type")
-# Property.create(name: "Oolong" , descrip: "Tea Type")
-# Property.create(name: "Pu'erh" , descrip: "Tea Type")
-# Property.create(name: "White" , descrip: "Tea Type")
-# Property.create(name: "Herbal" , descrip: "Tea Type")
-# Property.create(name: "Oolong" , descrip: "Tea Type")
-# Property.create(name: "Matcha" , descrip: "Tea Type")
-# Property.create(name: "Chai" , descrip: "Tea Type")
-# Property.create(name: "Herbal" , descrip: "Tea Type")
-# Property.create(name: "Berry" , descrip: "Flavour")
-# Property.create(name: "Chocolate" , descrip: "Flavour")
-# Property.create(name: "Cinnamon" , descrip: "Flavour")
-# Property.create(name: "Citrus" , descrip: "Flavour")
-# Property.create(name: "Coconut" , descrip: "Flavour")
-# Property.create(name: "Floral" , descrip: "Flavour")
-# Property.create(name: "Fruity" , descrip: "Flavour")
-# Property.create(name: "Ginger" , descrip: "Flavour")
-# Property.create(name: "Grassy" , descrip: "Flavour")
-# Property.create(name: "Malty" , descrip: "Flavour")
-# Property.create(name: "Mint" , descrip: "Flavour")
-# Property.create(name: "Nutty" , descrip: "Flavour")
-# Property.create(name: "Spicy" , descrip: "Flavour")
-# Property.create(name: "Sweet" , descrip: "Flavour")
-# Property.create(name: "Vanilla" , descrip: "Flavour")
