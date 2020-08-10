@@ -10,8 +10,9 @@
     <div class="row px-5">
       <h4>Shipped status: <%= @order.shipped ? "Shipped"  : "Not shipped" %></h4><br>
       <% if @order.seller_id == current_user.id && @order.shipped == false %>
-      <%= link_to  "Change Status to Shipped", order_path(@order), method: "PATCH",
-                                                              data: {confirm: "Are you sure? You won't be able to undo this."} %>
+      <%= link_to  "Change Status to Shipped", order_path(@order), class: "btn btn-primary",
+                                                                  method: "PATCH",
+                                                                  data: {confirm: "Are you sure? You won't be able to undo this."} %>
       <% end %>
     </div>
     <div class="row pt-5 px-5">
