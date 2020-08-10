@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
 
   get '/contact', to: 'pages#contact', as: 'contact'
-  #get '/admindash', to: 'pages#admindashboard'
 
   get '/browse', to: 'pages#browse', as: 'browse'
   post '/browse', to: 'pages#search'
