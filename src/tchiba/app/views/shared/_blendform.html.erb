@@ -42,6 +42,7 @@
       </div>
       <div class="form-group">
         <%= f.label :property, 'Categories' %><br>
+        <% #Loads all properties into the collection checkboxes %>
         <%= f.collection_check_boxes :property_ids, Property.all, :id, :name do |c| %>
           <div class="form-check form-check-inline badge badge-info">
             <%= c.check_box(class: "form-check-input") %>

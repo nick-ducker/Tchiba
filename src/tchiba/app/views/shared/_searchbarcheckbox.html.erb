@@ -7,6 +7,7 @@
           </div>
           <hr>
           <div class="form-group">
+            <% #loads properties with ID's less than 11 into the checkbox collection %>
             <%= f.collection_check_boxes :tea_ids, Property.where("id < ?", 11), :id, :name do |c| %>
               <div class="form-check form-check-inline badge badge-info">
               <%= c.check_box(class: "form-check-input") %>
@@ -16,6 +17,7 @@
           </div>
           <hr>
           <div class="form-group">
+            <% #loads properties with ID's more than 10 into the checkbox collection %>
             <%= f.collection_check_boxes :flavour_ids, Property.where("id > ?", 10), :id, :name do |c| %>
               <div class="form-check form-check-inline badge badge-success">
               <%= c.check_box(class: "form-check-input") %>

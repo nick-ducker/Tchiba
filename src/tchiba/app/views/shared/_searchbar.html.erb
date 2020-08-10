@@ -7,10 +7,12 @@
           </div>
           <div class="form-group">
             <%= f.label :tea_ids, 'Tea Type' %>
+            <% #loads properties with ID's less than 11 into the select collection %>
             <%= f.collection_select :tea_ids, Property.where("id < ?", 11), :id, :name, {}, class: "form-control" %>
           </div>
           <div class="form-group">
             <%= f.label :flavour_ids, 'Flavour' %>
+            <% #loads properties with ID's more than 10 into the select collection %>
             <%= f.collection_select :flavour_ids, Property.where("id > ?", 10), :id, :name, {}, class: "form-control" %>
           </div>
           <%= f.submit "Search", class: "btn btn-primary"%>
