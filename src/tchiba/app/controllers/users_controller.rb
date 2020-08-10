@@ -12,21 +12,25 @@ class UsersController < ApplicationController
 
   def profile
     begin
+      #find user using parameters ID (explicity written because of rescue statement)
       @user = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "That user doesn't exist"
       redirect_to root_path
     end
-
+    #loads blends attached to a particular user
     @pagyblends, @blends = pagy(@user.blends)
+    #loads reviews attached to a particular user
     @pagy, @reviews = pagy(@user.reviews)
   end
 
   def reviewhistory
+    #loads reviews attached to the current user
     @pagy, @reviews = pagy(current_user.reviews)
   end
 
   def ordertransactionhistory
+    #loads buying and selling orders attached to a current user
     @buyerorders = current_user.buyer_orders
     @sellerorders = current_user.seller_orders
 
@@ -48,6 +52,7 @@ class UsersController < ApplicationController
   private
 
   def current_user_set
+    #pass the current user into a instance variable
     @user = current_user
   end
 end
