@@ -1,30 +1,32 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
-  before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy]
+
+  before_action :authenticate, only: [:create, :show, :successful_payment, :failed_payment, :destroy, :update]
   before_action :cart_count, only: [:show]
   before_action :set_order, only: [:show, :update, :destroy]
   
   def create
     unless current_user.address 
       flash[:alert] = "You need to register an address before you can checkout"
-      redirect_to edit_user_registration_path and return
-    end
-
-    @cartitem = CartItem.find(params[:id])
-    @cartitem.create_order(
+      redirect_to edit_user_registration_path
+    else
+      @cartitem = CartItem.find(params[:id])
+      @cartitem.create_order(
       blend_id: @cartitem.blend.id,
       buyer_id: current_user.id,
       seller_id: @cartitem.blend.user.id,
       gross: @cartitem.gross_price,
       discount: @cartitem.total_discount,
       total: @cartitem.total_amount
-    )
-    redirect_to @cartitem.order
+      )
+      redirect_to @cartitem.order
+    end
   end
 
   def show
     @paid = @order.paid
     @transactions = @order.transactions
+
     # STRIPE PAYMENT SETUP
     unless @paid
       session = Stripe::Checkout::Session.create(
@@ -50,8 +52,8 @@ class OrdersController < ApplicationController
       )
 
       @session_id = session.id
+      ##############
     end
-
   end
 
   def successful_payment
@@ -70,7 +72,6 @@ class OrdersController < ApplicationController
   end
 
   def webhook
-    pp params
     payment_id= params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
 
@@ -110,7 +111,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    
     @order.update(shipped: true)
     redirect_to order_path(@order)
   end
