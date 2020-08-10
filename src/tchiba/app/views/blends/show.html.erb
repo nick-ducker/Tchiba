@@ -40,7 +40,7 @@
                                                   method: 'DELETE',
                                                   data: { confirm: 'Are you sure?' } %>
       <% else %>
-        <%= form_with model: @cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
+        <%= form_with scope: :cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
           <%= f.hidden_field :blend_id, value: @blend.id %>
           <div class="form-group">
           <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
@@ -52,9 +52,9 @@
         <%= link_to  "Ask a question", new_conversation_path(blend_id: @blend.id), class: "btn btn-info" %>
       <% end %>
       <% else %>
-        <%= form_with model: @cart_item, url: user_session_path, method: "GET", local: true do |f| %>
+        <%= form_with scope: :cart_item, url: user_session_path, method: "GET", local: true do |f| %>
           <div class="form-group">
-          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
+          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control", required: true %>
           </div>
           <%= f.submit "Add to Cart", class: "btn btn-primary" %>
         <% end %>

@@ -1,5 +1,5 @@
 class BlendsController < ApplicationController
-  before_action :authenticate, only: [:create, :edit, :destroy, :update]
+  before_action :authenticate, only: [:create, :edit, :destroy, :update, :new]
 
   def create
     if current_user.blends.create(strong_blend_params)
@@ -11,18 +11,12 @@ class BlendsController < ApplicationController
   end
 
   def new
-    if current_user
-      @blend = Blend.new
-    else
-      flash[:alert] = "You must create an account to do this."
-      redirect_to new_user_registration_path
-    end
+    @blend = Blend.new 
   end
 
   def show
     @blend = Blend.find(params[:id])
     @pagy, @reviews = pagy(@blend.reviews)
-    @cart_item = CartItem.new
   end
 
   def edit
