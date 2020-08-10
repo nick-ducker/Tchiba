@@ -6,10 +6,12 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update, :destroy]
   
   def create
+    #check the current user to see if they have an address attached to their account
     unless current_user.address 
       flash[:alert] = "You need to register an address before you can checkout"
       redirect_to edit_user_registration_path
     else
+      #Find the cart item using the sent through parameter ID and create an order off of it
       @cartitem = CartItem.find(params[:id])
       @cartitem.create_order(
       blend_id: @cartitem.blend.id,
@@ -24,7 +26,9 @@ class OrdersController < ApplicationController
   end
 
   def show
+    #Check the set order to see if it's been paid
     @paid = @order.paid
+    #Load all the transactions connected to the set order.
     @transactions = @order.transactions
 
     # STRIPE PAYMENT SETUP
@@ -80,7 +84,7 @@ class OrdersController < ApplicationController
     blend_id = payment.metadata.blend_id
     order_id = payment.metadata.order_id
     cart_item_id = payment.metadata.cart_item_id
-
+    #Find an order using the order_id contained in the strip metadata
     order = Order.find(order_id)
 
     hooktrans = Transaction.new(
@@ -90,10 +94,10 @@ class OrdersController < ApplicationController
     )
 
     hooktrans.save
+    
 
-    transactions = order.transactions
     x = 0
-    transactions.each do |trans|
+    order.transactions.each do |trans|
       if trans.paid
         x += trans.amount
       end
@@ -101,9 +105,9 @@ class OrdersController < ApplicationController
     x >= order.total ? (@paid = true) : (@paid = false)
 
     if @paid && order.paid == false
-      order.update(paid: true)
+      order.update(paid: true, cart_item_id: nil)
       order.blend.update(quantity: (order.blend.quantity - order.blend.quantity))
-      Order.update(cart_item_id: nil)
+      #find and destroy orders associated cart item if the order has been paid
       CartItem.find(cart_item_id).destroy
     end
 
@@ -124,6 +128,7 @@ class OrdersController < ApplicationController
 private
 
   def set_order
+    #find an order by the send through parameter ID
     @order = Order.find(params[:id])
   end
 
