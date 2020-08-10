@@ -40,12 +40,16 @@
                                                   method: 'DELETE',
                                                   data: { confirm: 'Are you sure?' } %>
       <% else %>
-        <%= form_with scope: :cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
-          <%= f.hidden_field :blend_id, value: @blend.id %>
-          <div class="form-group">
-          <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
-          </div>
-          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+        <% if @blend.quantity > 0 %>
+          <%= form_with scope: :cart_item, url: cart_add_path(current_user.cart), local: true do |f| %>
+            <%= f.hidden_field :blend_id, value: @blend.id %>
+            <div class="form-group">
+            <%= f.number_field :blend_quantity, in: 1..@blend.quantity, step: 1, class: "form-control" %>
+            </div>
+            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+          <% end %>
+        <% else %>
+          <h5>Out of Stock!</h5>
         <% end %>
         <hr>
         <%= link_to  "Leave a review", new_review_path(blend_id: @blend.id), class: "btn btn-warning" %>
