@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :destroy]
   
   def new
+    #find the blend using the blend_id sent through in the parameters
     @blend = Blend.find(params[:blend_id])
     @review = Review.new
   end
@@ -22,7 +23,8 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    blend = Blend.find(@review.blend.id)
+    #finds the blend attached the particular review.
+    blend = @review.blend
     @review.destroy
     blend.update(totalrating: blend.aggregate_ratings)
     redirect_to blend_path(blend)
@@ -35,6 +37,7 @@ private
   end
 
   def set_review
+    #finds the review using the sent through ID in parameters
     @review = Review.find(params[:id])
   end
 
