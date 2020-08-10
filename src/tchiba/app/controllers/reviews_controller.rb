@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate, except: [:show]
+  before_action :set_review, only: [:show, :destroy]
   
   def new
     @blend = Blend.find(params[:blend_id])
@@ -18,13 +19,11 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find(params[:id])
   end
 
   def destroy
-    review = Review.find(params[:id])
-    blend = Blend.find(review.blend.id)
-    review.destroy
+    blend = Blend.find(@review.blend.id)
+    @review.destroy
     blend.update(totalrating: blend.aggregate_ratings)
     redirect_to blend_path(blend)
   end
@@ -33,6 +32,10 @@ private
 
   def strong_blend_params
     params.require(:review).permit(:user_id, :blend_id, :descrip, :rating)
+  end
+
+  def set_review
+    @review = Review.find(params[:id])
   end
 
 end
