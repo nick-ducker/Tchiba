@@ -23,6 +23,7 @@ class BlendsController < ApplicationController
   end
 
   def delete_image
+    #Finds a specific image by the sent parameter ID
     image = ActiveStorage::Attachment.find(params[:id])
     image.purge
     flash[:alert] = "Image removed"
@@ -51,6 +52,7 @@ private
   end
 
   def set_blend
+    #Finds the blend according to the parameter ID
     @blend = Blend.find(params[:id])
   end
 
