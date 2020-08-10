@@ -16,11 +16,12 @@ class CartsController < ApplicationController
   def remove_item
     if @cartitem.order
       flash[:alert] = "You must cancel your order before you can remove this item from your cart"
-      redirect_to order_path(@cartitem.order) and return
+      redirect_to order_path(@cartitem.order)
+    else
+      @cartitem.destroy
+      flash[:alert] = "Blend removed from cart"
+      redirect_back(fallback_location: root_path)
     end
-    @cartitem.destroy
-    flash[:alert] = "Blend removed from cart"
-    redirect_back(fallback_location: root_path)
   end
 
   def add_item
