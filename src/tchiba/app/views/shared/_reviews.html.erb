@@ -7,6 +7,11 @@
         <h6 class="card-subtitle mb-2 text-muted"><%= link_to  review.blend.name, blend_path(review.blend) %></h6>
         <p class="card-text"><%= review.descrip %></p>
         <%= link_to  review.user.name, profile_path(review.user), class: "card_link" %>
+        <% if review.user.id == current_user.id %>
+        <%= link_to "Delete", review_path(review), class: "btn btn-danger",
+                                                    method: "DELETE"
+                                                    data: {confirm: "Are you sure?"} %>
+        <% end %>
         <p class="card-text"><small class="text-muted"><%= review.created_at %></small></p>
       </div>
     </div>
