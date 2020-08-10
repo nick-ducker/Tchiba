@@ -8,9 +8,6 @@ class PagesController < ApplicationController
   def contact
   end
 
-  def admindashboard
-  end
-
   def browse
     @pagy, @blends = pagy(Blend.all)
   end
@@ -19,7 +16,6 @@ class PagesController < ApplicationController
     redirect_to browse_path if search_params.empty?
     property_ids = get_property_ids
     @pagy, @blends = pagy(search_function(search_params[:search], property_ids))
-    
     render 'browse'
   end
 
