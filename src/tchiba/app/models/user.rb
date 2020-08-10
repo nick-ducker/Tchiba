@@ -19,9 +19,12 @@ class User < ApplicationRecord
 
   def calculate_credit
     credit = 0.0
+    #checks to see if the user has any seller orders
     if self.seller_orders
+      #iterates through each of the seller orders
       self.seller_orders.each do |order|
         if order.paid
+          #iterates through each of the transactions and adds them to a var if they have been paid
           order.transactions.each do |trans|
             if trans.paid
               credit += trans.amount  

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def calculate_credit
     @user.update(credit: @user.calculate_credit)
+    flash[:alert] = "Credit Calculated!!"
     redirect_to account_path
   end
 
