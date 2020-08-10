@@ -2,11 +2,34 @@
 
 # Tchiba
 
-IMAGE
+## Screenshots
+<details>
+  <summary><strong>Expand</strong></summary>
 
-## Screenshots(Collapsible)
+  ## **Home Page**
+  ![Home Page](docs/imgs/screenshot1_homepage.png)
+********
+  ## **Browse Page**
+  ![Browse Page](docs/imgs/screenshot2_browse.png)
+**********
+  ## **Blend Page**
+  ![Blend Page](docs/imgs/screenshot3_blend.png)
+**********
+  ## **Profile Page**
+  ![Profile Page](docs/imgs/screenshot4_profile.png)
+***********
+  ## **Account Page**
+  ![Account Page](docs/imgs/screenshot5_account.png)
+**********
+  ## **Cart Page**
+  ![Cart Page](docs/imgs/screenshot6_cart.png)
+***********
+  ## **Order Page**
+  ![Order Page](docs/imgs/screenshot7_order.png)
 
-### Task allocation and Tracking
+</details>
+
+## **Task allocation and Tracking**
 
 For Tchiba, I am using a mixture of strategies and technologies to create, allocate and track tasks. 
 Firstly I simply drafted a couple of ideas on paper for the application, before settling on a broad concept I was happy with. I then went a little deeper and touched on some basic user story ideas for how I wanted the application to function.
@@ -36,7 +59,7 @@ Once the implementation plan was done, I used my Figma wire-frames to structure 
 
 Once the front end was complete, I was able to look back over my Trello and pick apart the little bits and bobs I hadn't don't in implementation and see what had changed. I also used it to refer back to my last documentation tasks.
 
-### Purpose of Application
+## **Purpose of Application**
 
 Tea shops around the world not only sell single origin tea, but also sell tea blends that are generally trademarked under that particular tea shop. 
 However, within the tea loving community, there is also a culture around creating your own tea blends and sharing these blends with others. Unfortunately, this culture is somewhat invisible to the general public and overshadowed by the commercial tea brands. 
@@ -45,11 +68,11 @@ The purpose of Tchiba is to provide a platform to those humans who have a passio
 
 The goal here is 3 fold. Tchiba aims to support and help grow grassroots tea culture, educate people outside of the community about different ways of approaching tea culture and encourage sustainable ethical approaches to sourcing tea.
 
-## Target Audience
+## **Target Audience**
 
 Tchiba was created to cater to a large spectrum of tea drinkers. For the tea connoisseurs, Tchiba allows users to create their product with a lot of detail, down to the details behind each part of the blend. Tchiba also allows users to send questions to sellers about particular blends if they want to know more. On the other end of the spectrum, Tchiba also allows easy navigation and exploration, as well as filtering by category and price for people just getting into tea blends who wish to simply see what is popular and well rated at the time according to their budget. 
 
-## User Stories
+## **User Stories**
 
 *  As a User, I want to be able to create, log-in to and log-out of of a personal account
 *  As a User, I want the option to to stay signed in on a particular browser if I choose to do so
@@ -62,7 +85,7 @@ Tchiba was created to cater to a large spectrum of tea drinkers. For the tea con
 *  As a Seller, I want an automatically generated report of orders and their status
 *  As a Buyer, I want to see my current orders and order history
 
-## Functionality 
+## **Functionality** 
 
 Tchiba is a user based, two sided marketplace. Some fundamental features of this application are:
 *  User sign up, log-in and log-out
@@ -86,23 +109,23 @@ The above describes the Minimum Viable Product version of Tchiba. The following 
   *  Receipts (seller/buyer)
   *  Credit (seller)
 
-#### Languages
+#### *Languages*
 * Ruby
 * HTML
 * SCSS
 * JavaScript
 
-#### Framework
+#### *Framework*
 * Ruby on Rails: The entire application was built with Ruby on Rails, both for back end and front end.
 * PostgreSQL: The application runs a relational PostgreSQL database for non-image data storage.
 
-#### Third Party Services
+#### *Third Party Services*
 * Heroku: Heroku was used to host the application online. Heroku also provides the PostgreSQL database.
 * AWS S3: S3 was used to store all the images needed for the application.
 * Git: Git was used for source control and pushing all changes to Heroku
 * Stripe: Stripe was used to process test payments for blends. It takes care of processing payments and sends data back to the application via a webhook.
 
-#### Gems
+#### *Gems*
 * Rspec: Rspec was used early in the project to test all the models. This was done before any creation on the controllers and ensured I had a robust database to work with from the outset.
 * Shoulda: Another test gem to more easily test relationships between Rails models.
 * FactoryBot: Used hand in hand with Rspec to create the models. This allowed me to populate a test database and run all my specs this way without interacting with the development database.
@@ -110,38 +133,48 @@ The above describes the Minimum Viable Product version of Tchiba. The following 
 * Bootstrap: Used for all the front end styling of the application. Allowed for quick and easy presentation of the front end.
 * Pagy: A pagination gem that helps make the site more navigational and reduces the memory load of the website on the server.
 
+*****
 
-## Sitemap
+## **Wireframes** 
+
+<details>
+  <summary><strong>Mobile</strong></summary>
+  
+  ![Mobile wireframe](docs/imgs/mobile_wireframe.png)
+
+</details>
+
+<details>
+  <summary><strong>Tablet</strong></summary>
+  
+  ![Tablet wireframe](docs/imgs/tablet_wireframe.png)
+
+</details>
+
+<details>
+  <summary><strong>Desktop</strong></summary>
+  
+  ![Desktop wireframe](docs/imgs/desktop_wireframe.png)
+
+</details>
+
+## **Sitemap**
 
 ![Tchiba Sitemap](docs/imgs/tchiba_site_map.png)
 
-## Techstack
+*****
 
-## Wireframes 
-
-### Mobile 
-
-![Mobile wireframe](docs/imgs/mobile_wireframe.png)
-
-### Tablet
-
-![Tablet wireframe](docs/imgs/tablet_wireframe.png)
-
-### Desktop
-
-![Desktop wireframe](docs/imgs/desktop_wireframe.png)
-
-## Planning phase ERD
+## **Planning phase ERD**
 
 ![Planned ERD](docs/imgs/tchiba_erd.png)
 
-## Database relations to be implemented
+## **Database relations to be implemented**
 
 Tchiba is strongly oriented around the interaction of Users via Blends. As such, most of the relations for Tchiba either connect or add attributes/detail to these two tables.
 
 Before implementation, these are the relationships that have been planned. This list was made using the planned ERD above.
 
-#### Primary Tables
+#### *Primary Tables*
 
 *  User
     Has Many or None
@@ -170,7 +203,7 @@ As previously mentioned, the user sits centrally in the applications framework. 
       
 Blends always belong to a single user. A blend may also belong to multiple orders, through the orders blends join table. When a Blend is created it must have at least one attribute in order to more easily categorize all the products, which is achieved through a blends attributes join table. It also can have many or no images, reviews and conversations.  
 
-#### Secondary Tables
+#### *Secondary Tables*
 
 *  Conversation
     Has many
@@ -231,10 +264,14 @@ Belongs to one conversation only. A boolean is reponsible for differentiating th
 
 Belongs to only one blend.
 
-## Final ERD
+******
 
-## High level abstraction
+## **Final ERD**
 
-## Application Models and their relationships
+![Final ERD](docs/imgs/tchiba_final_erd.png)
 
-## Testing 
+## **High level abstraction**
+
+## **Application Models and their relationships**
+
+## **Testing** 
