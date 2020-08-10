@@ -17,9 +17,11 @@ class Blend < ApplicationRecord
   validates_numericality_of :price, :weight
 
   def aggregate_ratings
+    #checks to see if the blend has any reviews
     if self.reviews.empty?
       return 0.0
     else
+      #loads all the reviews for the blend and then averages the rating of them all
       reviews = self.reviews.all
       rating = reviews.average(:rating)
       return rating.round(2)
