@@ -16,7 +16,7 @@ class BlendsController < ApplicationController
   end
 
   def show
-    @pagy, @reviews = pagy(@blend.reviews)
+    @pagy, @reviews = pagy(@blend.reviews, items: 10)
   end
 
   def edit
