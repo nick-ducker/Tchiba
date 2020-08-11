@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   end
 
   def profile
+    #find user using parameters ID
+    @user = User.find(params[:id])
+
     if @user == nil
       flash[:alert] = "That user doesn't exist"
       redirect_to root_path
