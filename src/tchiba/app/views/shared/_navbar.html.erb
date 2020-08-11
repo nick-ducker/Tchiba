@@ -1,12 +1,15 @@
 <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand p-0" href="<%= root_path %>">
-    <%= image_tag  "tchibalogo.png", class: "w-50 " %>
+  
+  <a class="nav-item p-0 widther" href="<%= root_path %>">
+    <%= image_tag  "tchibalogo.png", class: "img-fluid " %>
   </a>
   
+ <%= link_to  "Browse", browse_path, class: "navbar-brand btn btn-success hide ml-auto" %>   
+
   <% if current_user %>
-    <a class="navbar-brand btn btn-primary ml-auto" href="<%= cart_show_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
+    <a class="navbar-brand btn btn-primary autoleftmobile" href="<%= cart_show_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
   <% else %>
-    <a class="navbar-brand btn btn-primary ml-auto" href="<%= user_session_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
+    <a class="navbar-brand btn btn-primary autoleftmobile" href="<%= user_session_path %>">Cart <span class="badge badge-secondary"><%= session[:count] %></span></a>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

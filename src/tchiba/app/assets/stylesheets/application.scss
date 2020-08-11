@@ -15,6 +15,13 @@
  *
  */ 
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+
+p {
+  font-family: 'Montserrat','calibri',sans-serif;
+}
+
 html {
   height: 100vh;
   
@@ -39,12 +46,18 @@ body {
 
 .primary {
   background: linear-gradient(rgb(105, 181, 120),rgba(105, 181, 120,0.5));
-  border-radius: 3rem;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
+  box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
 }
 
 .secondary {
   background: linear-gradient(rgb(58, 125, 68),rgba(58, 125, 68,0.5));
-  border-radius: 3rem;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
+  box-shadow: 0px 6px 21px -3px rgba(0,0,0,0.51);
 }
 
 .spacer {
@@ -76,3 +89,59 @@ body {
   margin-left: 10%;
   z-index: 1070;
 }
+
+.card {
+  -webkit-box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+  box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+}
+
+.imgborder {
+  -webkit-box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+  box-shadow: 0px 6px 10px 3px rgba(0,0,0,0.51);
+}
+
+.widther {
+  width: 35%;
+}
+
+.hide {
+  display: none
+}
+
+.autoleftmobile {
+  margin-left: auto;
+}
+
+@media (min-width: 576px) { 
+  
+  .widther {
+    width: 25%;
+  }
+
+  .hide {
+    display: block
+  }
+
+  .autoleftmobile {
+    margin-left: 0;
+  }
+
+ }
+
+@media (min-width: 768px) { 
+  
+  .widther {
+    width: 15%;
+  }
+
+ }
+
+@media (min-width: 992px) { 
+  
+  .widther {
+    width: 9%;
+  }
+
+ }

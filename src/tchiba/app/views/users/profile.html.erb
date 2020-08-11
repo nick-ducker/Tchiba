@@ -8,12 +8,12 @@
       </div>
 
       <%  if @user.profilepic.attached? %>
-      <div class='row flex-column m-2'>
-      <%= image_tag @user.profilepic, class: 'img-fluid imgborder' %>
+      <div class='row flex-column m-2 align-items-center'>
+      <%= image_tag @user.profilepic, class: 'img-fluid imgborder w-50' %>
       </div>
       <% else %>
       <div class='row flex-column m-2'>
-      <%= image_tag  "teapot.jpg", class: 'img-fluid imgborder' %>
+      <%= image_tag  "teapot.jpg", class: 'img-fluid imgborder w-50' %>
       </div>
       <% end %>
 
@@ -25,8 +25,9 @@
       </div>
       <% else %>
         <div class="row">
-          <h5>Blends</h5>
+          <h3>Blends</h3>
         </div>
+        <hr>
         <%= render  "shared/blends", collection: @pagyblends %>
       <% end %>
       
@@ -38,8 +39,9 @@
       </div>
       <% else %>
         <div class="row">
-          <h5>Reviews</h5>
+          <h3>Reviews</h3>
         </div>
+        <hr>
         <%= render  "shared/reviews", collection: @pagy %>
       <% end %>
     </div>
