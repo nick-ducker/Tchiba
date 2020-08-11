@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   def browse
     #pull all the blends for the database and put into pagination gem
-    @pagy, @blends = pagy(Blend.includes(:user, :properties).all, items: 6)
+    @pagy, @blends = pagy(Blend.includes(:user, :properties).order("RANDOM()").all, items: 6)
   end
 
   def search
