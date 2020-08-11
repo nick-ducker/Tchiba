@@ -88,14 +88,13 @@ class OrdersController < ApplicationController
     order = Order.find(order_id)
 
     hooktrans = Transaction.new(
-      order_id: order_id,
+      order: order,
       amount: amount / 100,
       paid: true
     )
 
     hooktrans.save
     
-
     x = 0
     order.transactions.each do |trans|
       if trans.paid
