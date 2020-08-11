@@ -2,8 +2,12 @@
 
 # Tchiba
 
+[Link to Github Repo](https://github.com/nick-ducker/NicholasDucker_T2A2)
+
 [Link to deployed website](https://tchiba.herokuapp.comm)
+
 **IMPORTANT**
+
 You can log into the application with:
 email1@email.com OR email2@email.com, etc up to 4
 password1 OR password2, etc up to 4
