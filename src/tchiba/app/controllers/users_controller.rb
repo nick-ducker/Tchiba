@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate, only: [:show, :reviewhistory, :ordertransactionhistory, :calculate_credit]
-  before_action :current_user_set, only: [:show, :calculate_credit]
+  before_action :current_user_set, only: [:profile, :show, :calculate_credit]
   
   def show
   end
@@ -12,10 +12,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    begin
-      #find user using parameters ID (explicity written because of rescue statement)
-      @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
+    if @user == nil
       flash[:alert] = "That user doesn't exist"
       redirect_to root_path
     end
