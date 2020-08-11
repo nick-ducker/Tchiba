@@ -272,6 +272,134 @@ Belongs to only one blend.
 
 ## **High level abstraction**
 
+Looking at Tchiba from a higher level, there are a few fundamental interactions happening.
+Users interact with the application, and only a signed up user can interact fully with the application. Logged-in users are the backbone of the entire application, as almost all of the other components are reliant on their interaction with users in order to be created or change. 
+
+Users essentially own and modify the content on the site. 
+
+We have the actual content of the application, in this case Blends, that the users interact with. Blends are dependant on the existence of Users to be created and form the basis of interaction between the users. Users use blends to interact with the application more deeply. Through a Blend, Users can create reviews, start conversations and add items to their cart.
+
+The Cart is the last main component of the application. While the cart itself is not responsible for much functionality, it creates an integral link between browsing the blends and actually purchasing the blend. To purchase blends, Users must create orders and use them to create transactions. The Cart makes this link between Users and Orders, allowing Users to temporarily store Blends before creating orders to purchase the blends.
+
 ## **Application Models and their relationships**
 
+The final application models changed slightly from the plan as demonstrated in the above ERD.
+
+#### *Database Models and their relationship*
+
+**Address**
+
+* An address belongs to one user and must have a user assigned to it upon creation. This ensures that all addresses will be valid.
+
+An existing address relationship with a user is important to the application in terms of creating an order. Without an address, it wouldn't make sense to be able to create an order.
+
+**Blend**
+
+  * A Blend belongs to one user and must have a user assigned to it upon creation. 
+  * A Blend can have many conversations attached to it
+  * A Blend can have and belong to many properties. This uses a simple join table to join a blend to its associated properties.
+  * A Blend can have many reviews
+  * A Blend can have many orders
+  * A Blend has many attached images
+  
+A Blend only needs a user to be created. The rest of the relationships are optional and can be destroyed without invalidating the blend. The Blend acts as a central hub for reviews and conversations.
+
+**Cart**
+
+  * A Cart belongs to a User and must have a user assigned to it on creation
+  * A Cart can have many Cart Items.
+
+The cart allows the users to save Blends to checkout one by one, or refer back to in the future. While the cart feature is not integral to the functioning of a marketplace app (one could simply design the application to create orders straight from a blend page), it certainly is a nice quality of life addition.
+
+**Cart Item**
+
+  * A cart item belongs to a cart and this must be assigned at creation.
+  * A cart item belongs to a blend and this must be assigned at creation.
+  * A cart item has one order, which is an optional relationship.
+
+The cart item almost acts as a join table except it holds data for the quantity being purchased. It is used to link a blend into an order and is also related to the cart. 
+When an order is created and paid for, the cart item is destroyed. This might not be the best way to implement this cart item, but by the time I realised this I didn't have the time to implement a different idea.
+
+**Conversation**
+
+  * A conversation belongs to a user in two different ways.
+    * belongs to a "to_user", or the user that the message is being sent to.
+    * belongs to a "from_user", or the user that the message is being sent from.
+
+  * A conversation belongs to a blend and must have one assigned to it on creation
+  * A conversation has many messages
+
+The conversation acts as the holder for messages between to users relating to one particular blend. There is only one conversation between two users for one blend.
+
+**Message**
+
+  * A message belongs to a conversation and must have one assigned at creation.
+  
+  The message simply holds content for a message. It does not have an assigned user however, instead using a boolean value to check whether it is from the "from_user" or not, allowing correct handling.
+
+**Order**
+
+  * An order belongs to a cart item, but this is an optional field. This is due to the cart item being deleted once the order is paid for, so it must allow for a null field.
+  * An order belongs to a user in two ways
+    * It has a buyer, the user who is buying the blend
+    * It has a seller, the user who is selling the blend
+
+  * The order has many transactions
+  * The order also belongs to a blend. This was added last minute in order to smooth over the transition from a cart_item existing, to a cart_item not existing anymore.
+
+The order ties all the user classes, blends and cart items together into something that can accept transactions. 
+
+**Property**
+
+  * A property has and belongs to many blends through a blends properties join table.
+
+Properties stand alone and are only connected to a blend when the blend is created or updated with corresponding properties
+
+**Review**
+
+  * A review belongs to a user, and must have one assigned at creation
+  * A review belongs to a blend, and must have one assigned at creation
+
+Reviews allow blends to be rated and a user may submit more than one review for the same blend. 
+
+**Transaction**
+
+  * Transactions belong to an order and must have one assigned at creation
+
+Transactions are simply used to interact with orders to hold successful or failed payment data. Initially I created transactions to handle refunds, but in the end scrapped the refund idea but still kept the transaction functionality. 
+
+**User**
+
+  * Users have one address
+  * Users have one cart
+  * Users have one attached profile picture
+  * Users have many conversations in two ways
+    * to_conversations, conversations that have been started with them
+    * from_conversations, conversations that they have started
+  * Users have many blends
+  * Users have many reviews
+  * Users have many order is two ways
+    * buyer_orders, orders where they are they buyer
+    * seller_orders, orders where they are the seller
+
+The user is, as previously mentioned, what sits at the top of the application. As such, a user can be created without any of the relations. As the user interacts with the app, these relationships will be created.
+
 ## **Testing** 
+
+For testing, I used two approaches
+
+I used unit testing with Rspec and FactoryBot when I was creating my models and database schema. This allowed me to customise and test my models and their relationships fully before I began building controllers for the application.
+
+Generally I would migrate a db table for a corresponding model, then first write failing validation tests for the model. I would then add the validation to the rails model to ensured these tests passed. Next I would write failing relationship tests, then change the models until they passed.
+
+FactoryBot allowed me to more easily create data in the test DB and local memory for testing validity statements and relationships.
+
+Initially, I wanted to use Rspec and Capybara to test the controllers/features, but once I realised how much extra work I would be making for myself, I decided to scrap the idea and simply code the controllers and skeleton front end together. I instead tried to work methodically by going through each controller and crafting the actions meticulously, then testing all these actions.
+
+Once this had been completed, I added the view using bootstrap and would consistently manual test to make sure I was getting the desired output.
+
+Once this had all been done and pushed to heroku, I again went through and tested the controller actions by interacting with the front end on Heroku, using a manual testing log to keep track of the actions tested.
+
+The theory behind this approach is that the front end SHOULD function perfectly and give me 99% of the feedback I'm looking for from the controller if things are functioning correctly. A few actions needed checking in the back end, but mostly I was able to ensure correct functioning of the controller actions by observing the reactive output to my input.
+
+![Testing Log](docs/imgs/tchibatestlog.jpg)
