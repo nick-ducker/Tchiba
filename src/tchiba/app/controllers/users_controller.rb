@@ -20,9 +20,14 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
     #loads blends attached to a particular user
+    if @user.blends
     @pagyblends, @blends = pagy(@user.blends, items: 6)
+    end
+
+    if @user.reviews
     #loads reviews attached to a particular user
     @pagy, @reviews = pagy(@user.reviews, items: 8)
+    end
   end
 
   def reviewhistory
