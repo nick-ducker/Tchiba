@@ -39,6 +39,9 @@ You can also create your own account, but you will need to input a valid email a
 
 ## **Task allocation and Tracking**
 
+**LINK TO TRELLO BOARD**
+[Trello link](https://trello.com/b/B0W6wP81/tchiba)
+
 For Tchiba, I am using a mixture of strategies and technologies to create, allocate and track tasks. 
 Firstly I simply drafted a couple of ideas on paper for the application, before settling on a broad concept I was happy with. I then went a little deeper and touched on some basic user story ideas for how I wanted the application to function.
 
