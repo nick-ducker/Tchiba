@@ -25,7 +25,9 @@
     <div class="col-11 col-sm-6 primary m-3 p-3">
       <h5>Blend name: <strong><%= @blend.name %></strong></h5>
       <hr>
-      <h5>Blender: <strong><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary" %></strong></h5>
+      <div class="d-flex align-items-center">
+      <h5>Blender:</h5><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary ml-1" %>
+      </div>
       <hr>
       <h5>Price: <strong><%= number_to_currency(@blend.price) %></strong></h5>
     </div>

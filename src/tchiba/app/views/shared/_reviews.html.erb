@@ -1,12 +1,12 @@
-<div class="row">
+<div class="row secondarytext">
   <div class="card-columns mx-3">
     <% @reviews.each do |review| %>
     <div class="card text-white bg-dark mb-4">
-      <div class="card-header"><%= review.rating.to_i %> / 5</div>
+      <div class="card-header"><strong class="badge-pill badge-success"><%= review.rating.to_i %> / 5</strong></div>
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted"><%= link_to  review.blend.name, blend_path(review.blend) %></h6>
         <p class="card-text"><%= review.descrip %></p>
-        <%= link_to  review.user.name, profile_path(review.user), class: "card_link" %>
+        <%= link_to  review.user.name, profile_path(review.user), class: "card_link btn btn-primary" %>
         <% if review.user.id == current_user.id %>
         <%= link_to "Delete", review_path(review), class: "btn btn-danger",
                                                     method: "DELETE",
