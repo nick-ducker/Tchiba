@@ -22,7 +22,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col primary m-3 p-3">
+    <div class="col-11 col-sm-6 primary m-3 p-3">
       <h5>Blend name: <strong><%= @blend.name %></strong></h5>
       <hr>
       <h5>Blender: <strong><%= link_to @blend.user.name, profile_path(@blend.user), class: "btn btn-primary" %></strong></h5>
@@ -70,7 +70,7 @@
   </div>
 
   <div class="row">
-    <div class= "col-4 secondary m-3 p-4">
+    <div class= "col-11 col-sm-4 secondary m-3 p-4">
     <h5><strong>Rating</strong>: <em><%= @blend.totalrating %> / 5</em></h5>
     <hr>
     <% if @blend.properties %>
