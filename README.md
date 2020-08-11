@@ -10,6 +10,7 @@
 
 You can log into the application with:
 email1@email.com OR email2@email.com, etc up to 4
+
 password1 OR password2, etc up to 4
 
 You can also create your own account, but you will need to input a valid email address.
@@ -44,6 +45,7 @@ You can also create your own account, but you will need to input a valid email a
 ## **Task allocation and Tracking**
 
 **LINK TO TRELLO BOARD**
+
 [Trello link](https://trello.com/b/B0W6wP81/tchiba)
 
 For Tchiba, I am using a mixture of strategies and technologies to create, allocate and track tasks. 
