@@ -44,7 +44,7 @@ Firstly I simply drafted a couple of ideas on paper for the application, before 
 
 From here, I moved onto Trello to start synthesizing the technical requirements with a more fleshed out vision of how the app was to be built. This allowed me to map out both the rubric requirements (to easily refer back to), and the technical/document requirements for the application. 
 
-I used this map to then flesh out the idea for Tchiba further. By referring back to the requirements, I was able to build a list of tasks for documentation. At this stage the initial user stories were planned also, to try and bring a bit more dimension to the planning process.
+I used this map to then flesh out the idea for Tchiba further. By referring back to the requirements I was able to build a list of tasks for documentation. At this stage the initial user stories were planned also with the idea to try and bring a bit more dimension to the planning process.
 
 I was then able to create my implementation plan by mixing the user stories (What I want) with the technical requirements (What is required). This gave me a solid structure of code related tasks for when the documentation had been finished. 
 
@@ -61,7 +61,7 @@ A typical Trello workflow, once it had been set up:
  6.  When all the tasks have been completed, mark them as done on the master list
  7.  Repeat.
 
-As the project progressed, I ended up becoming a little more freeform with my planning. My testing framework didn't turn out the way I thought it would due to time constraints. Essentially I used my implementation plan to create almost the entire application in conjunction with the user stories.
+As the project progressed, I ended up becoming a little more freeform with my planning and execution. My testing framework didn't turn out the way I thought it would due to time constraints. Essentially I used my implementation plan to create almost the entire application in conjunction with the user stories.
 
 Once the implementation plan was done, I used my Figma wire-frames to structure my front end development. I also created cards in Trello.
 
