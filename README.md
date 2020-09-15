@@ -4,7 +4,7 @@
 
 [Link to Github Repo](https://github.com/nick-ducker/NicholasDucker_T2A2)
 
-[Link to deployed website](https://tchiba.herokuapp.comm)
+[Link to deployed website](https://tchiba.herokuapp.com)
 
 **IMPORTANT**
 
